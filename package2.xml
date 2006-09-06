@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Selenium</name>
+ <channel>pear.php.net</channel>
+ <summary>PHP Client for Selenium RC</summary>
+ <description>PHP Client for Selenium RC</description>
+ <lead>
+  <name>Shin Ohno</name>
+  <user>shin</user>
+  <email>ganchiku@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Bjoern Schotte</name>
+  <user>bjoern</user>
+  <email>bjoern@thinkphphq.de</email>
+  <active>yes</active>
+ </developer>
+ <date>2006-09-06</date>
+ <time>23:51:22</time>
+ <version>
+  <release>0.1.4</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP License</license>
+ <notes>Fixed class name and some documents</notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="examples">
+    <file name="example.php" role="doc">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /examples -->
+   <dir name="Selenium">
+    <file name="Exception.php" role="php">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /Selenium -->
+   <dir name="tests">
+    <dir name="events">
+     <file name="readme.txt" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestButtonEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestCheckboxEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestFireEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestKeyEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestLinkEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestMouseEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestRadioEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestSelectEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="TestTextEvents.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- /tests/events -->
+    <dir name="html">
+     <file name="banner.gif" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_async_event.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_check_uncheck.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_click_javascript_page.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_click_page1.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_click_page2.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_confirm.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_dummy_page.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_editable.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_focus_on_blur.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_form_events.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_framed_page.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_i18n.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_just_text.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_locators.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_modal_dialog.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_modal_dialog_dialog.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_multiselect.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_open.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_page.slow.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_prompt.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_reload_onchange_page.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_select.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_select_window.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_select_window_popup.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_store_value.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_submit.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_text_content.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_type_page1.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_type_page2.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_verifications.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_verify_alert.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="test_visibility.html" role="test">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- /tests/html -->
+    <file name="SeleniumTest.php" role="test">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /tests -->
+   <file name="ChangeLog" role="doc">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+   <file name="README" role="doc">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+   <file name="selenium-server.jar" role="data">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+   <file name="Selenium.php" role="php">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+   <file name="TODO" role="doc">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.1.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0a12</min>
+   </pearinstaller>
+  </required>
+  <optional>
+   <package>
+    <name>HTTP_Request</name>
+    <channel>pear.php.net</channel>
+   </package>
+   <extension>
+    <name>curl</name>
+   </extension>
+  </optional>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-07-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Initial release</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.1</release>
+    <api>0.1.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-07-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Fixed Bug: Thanks to Bjoern Schotte, now developper of this package, fixed the HTTP Connection issue.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.2</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-08-08</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>- Fixed package.xml and package2.xml</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.3</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-08-29</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>- Fixed Bug Thanks to Asad, changed method name getAllSource to getHtmlSource</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.4</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-09-06</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+  - Removed Testing prefix from the class name. Not Testing_Selenium, but Selenium.
+  - Removed unnecessary docblock.
+  - Fixed fixed comment documents.
+  </notes>
+  </release>
+ </changelog>
+</package>
