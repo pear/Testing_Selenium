@@ -141,7 +141,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("testUserPassword", $this->selenium->getValue("password"));
 
             $this->selenium->click("submitButton");
-            $this->selenium->waitForPageToLoad(100);
+            $this->selenium->waitForPageToLoad();
             $this->assertRegExp("/Welcome, TestUser!/", $this->selenium->getText("//h2"));
 
 
@@ -804,6 +804,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("Test Confirm", $this->selenium->getTitle());
 
             $this->selenium->click("confirmAndLeave");
+            $this->selenium->waitForPageToLoad();
             $this->assertEquals("You are about to go to a dummy page.", $this->selenium->getConfirmation());
             $this->assertEquals("Dummy Page", $this->selenium->getTitle());
 
@@ -826,6 +827,8 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("Test Prompt", $this->selenium->getTitle());
             $this->selenium->answerOnNextPrompt("yes");
             $this->selenium->click("promptAndLeave");
+
+            $this->selenium->waitForPageToLoad();
             $this->assertEquals("Type 'yes' and click OK", $this->selenium->getPrompt());
             $this->assertEquals("Dummy Page", $this->selenium->getTitle());
 
