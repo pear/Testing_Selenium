@@ -16,8 +16,8 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
         // Please install tests the following URL or edit the URI
         // http://localhost/tests/
         // unchiku.com is just for the initial testing.
-//        $this->browserUrl = "http://www.unchiku.com/";
-        $this->browserUrl = "http://localhost/shin/";
+        $this->browserUrl = "http://www.unchiku.com/";
+//        $this->browserUrl = "http://yourserver/";
         // The path for the tests
         $this->testUrl = $this->browserUrl . "tests";
         parent::__construct($name);

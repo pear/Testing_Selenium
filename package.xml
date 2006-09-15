@@ -21,7 +21,7 @@
   </maintainers>
  <release>
   <version>0.1.4</version>
-  <date>2006-09-06</date>
+  <date>2006-09-16</date>
   <license>PHP License</license>
   <state>alpha</state>
   <notes>Fixed class name and some documents
@@ -234,7 +234,7 @@
    </release>
    <release>
     <version>0.1.4</version>
-    <date>2006-09-06</date>
+    <date>2006-09-16</date>
     <license>PHP License</license>
     <state>alpha</state>
     <notes>- Removed Testing prefix from the class name. Not Testing_Selenium, but Selenium.
