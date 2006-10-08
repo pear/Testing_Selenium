@@ -141,7 +141,7 @@ class Selenium
      * Run the browser and set session id.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function start()
@@ -155,7 +155,7 @@ class Selenium
      * Close the browser and set session id null
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function stop()
@@ -171,7 +171,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function click($locator)
@@ -187,7 +187,7 @@ class Selenium
      * @param string $locator an element locator
      * @param string $eventName the event name, e.g. "focus" or "blur"
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function fireEvent($locator, $eventName)
@@ -202,7 +202,7 @@ class Selenium
      * @param string $locator an element locator
      * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function keyPress($locator, $keycode)
@@ -217,7 +217,7 @@ class Selenium
      * @param string $locator an element locator
      * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function keyDown($locator, $keycode)
@@ -232,7 +232,7 @@ class Selenium
      * @param string $locator an element locator
      * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function keyUp($locator, $keycode)
@@ -246,7 +246,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function mouseOver($locator)
@@ -261,7 +261,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function mouseDown($locator)
@@ -279,7 +279,7 @@ class Selenium
      * @param string $locator an element locator
      * @param string $value the value to type
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function type($locator, $value)
@@ -293,7 +293,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function check($locator)
@@ -307,7 +307,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function uncheck($locator)
@@ -346,7 +346,7 @@ class Selenium
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @param string $optionLocator an option locator (a label by default)
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function select($selectLocator, $optionLocator)
@@ -361,7 +361,7 @@ class Selenium
      * @param string $locator an element locator identifying a multi-select box
      * @param string $optionLocator an option locator (a label by default)
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function addSelection($locator, $optionLocator)
@@ -376,7 +376,7 @@ class Selenium
      * @param string $locator an element locator identifying a multi-select box
      * @param string $optionLocator an option locator (a label by default)
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function removeSelection($locator, $optionLocator)
@@ -391,7 +391,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function submit($locator)
@@ -414,7 +414,7 @@ class Selenium
      *
      * @param string $url the URL to open; may be relative or absolute
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function open($url)
@@ -430,7 +430,7 @@ class Selenium
      *
      * @param string $windowId the JavaScript window ID of the window to select
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function selectWindow($windowId)
@@ -445,7 +445,7 @@ class Selenium
      * @param string $windowId the JavaScript window ID of the window to select
      * @param int $timeout a timeout in milliseconds, after which the action will return with an error
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function waitForPopUp($windowId, $timeout = null)
@@ -464,7 +464,7 @@ class Selenium
      * the user had clicked Cancel.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function chooseCancelOnNextConfirmation()
@@ -479,7 +479,7 @@ class Selenium
      *
      * @param string $answer the answer to give in response to the prompt pop-up
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function answerOnNextPrompt($answer)
@@ -492,7 +492,7 @@ class Selenium
      * Simulates the user clicking the "back" button" on their browser.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function goBack()
@@ -505,7 +505,7 @@ class Selenium
      * Simulates the user clicking the "Refresh" button" on their browser.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function refresh()
@@ -519,7 +519,7 @@ class Selenium
      * window or tab.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function close()
@@ -532,7 +532,7 @@ class Selenium
      * Has an alert occured?
      *
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isAlertPresent()
@@ -545,7 +545,7 @@ class Selenium
      * Has a prompt occured?
      *
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isPromptPresent()
@@ -558,7 +558,7 @@ class Selenium
      * Has confirm() been called?
      *
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isConfirmationPresent()
@@ -580,7 +580,7 @@ class Selenium
      * generated and Selenium will hang until someone manually clicks OK.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getAlert()
@@ -604,7 +604,7 @@ class Selenium
      * OK.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getConfirmation()
@@ -627,7 +627,7 @@ class Selenium
      * generated and Selenium will hang until someone manually clicks OK
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getPrompt()
@@ -640,7 +640,7 @@ class Selenium
      * Gets the absolute URL of the current page.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getLocation()
@@ -653,7 +653,7 @@ class Selenium
      * Gets the title of the current page.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getTitle()
@@ -666,7 +666,7 @@ class Selenium
      * Gets the entire text of the page.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getBodyText()
@@ -682,7 +682,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getValue($locator)
@@ -699,7 +699,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getText($locator)
@@ -722,7 +722,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getEval($script)
@@ -736,7 +736,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isChecked($locator)
@@ -751,7 +751,7 @@ class Selenium
      *
      * @param string $tableCellAddress a cell address, e.g. "foo.1.4"
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getTable($tableCellAddress)
@@ -765,7 +765,7 @@ class Selenium
      *
      * @param string $optionLocator an option locator (a label by default)
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getSelectedLabels($selectLocator)
@@ -779,7 +779,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getSelectedLabel($selectLocator)
@@ -793,7 +793,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getSelectedValues($selectLocator)
@@ -807,7 +807,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getSelectedValue($selectLocator)
@@ -821,7 +821,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getSelectedIndexes($selectLocator)
@@ -835,7 +835,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getSelectedIndex($selectLocator)
@@ -849,7 +849,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getSelectedIds($selectLocator)
@@ -863,7 +863,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getSelectedId($selectLocator)
@@ -877,7 +877,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isSomethingSelected($selectLocator)
@@ -891,7 +891,7 @@ class Selenium
      *
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getSelectOptions($selectLocator)
@@ -905,7 +905,7 @@ class Selenium
      *
      * @param string $attributeLocator  an element locator followd by an
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getAttribute($attributeLocator)
@@ -919,7 +919,7 @@ class Selenium
      *
      * @param string $pattern a pattern to match with the text of the page
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isTextPattern($pattern)
@@ -933,7 +933,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isElementPresent($locator)
@@ -951,7 +951,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isVisible($locator)
@@ -966,7 +966,7 @@ class Selenium
      *
      * @param string $locator an element locator
      * @access public
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     public function isEditable($locator)
@@ -980,7 +980,7 @@ class Selenium
      * If a given button has no ID, it will appear as "" in the array.
      *
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getAllButtons()
@@ -994,7 +994,7 @@ class Selenium
      * If a given link has no ID, it will appear as "" in the array.
      *
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getAllLinks()
@@ -1008,7 +1008,7 @@ class Selenium
      * If a given field has no ID, it will appear as "" in the array.
      *
      * @access public
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     public function getAllFields()
@@ -1022,7 +1022,7 @@ class Selenium
      * closing "html" tags.
      *
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getHtmlSource()
@@ -1040,7 +1040,7 @@ class Selenium
      * @param string $locator an element locator pointing to an input element or textarea
      * @param int $position the numerical position of the cursor in the field; position should be 0 to move the position to the beginning of the field. You can also set the cursor to -1 to move it to the endo of the field.
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function setCursorPosition($locator, $position)
@@ -1057,7 +1057,7 @@ class Selenium
      *
      * @param string $locator an element locator poiting to an input element or textarea
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getCursorPosition($locator)
@@ -1078,7 +1078,7 @@ class Selenium
      * @param string $context the message to be sent to the browser
      * @param string $logLevelThreashould one of "debug", "info", "warn" , "error", sets the thrshould for browser-side logging
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function setContext($context, $logLevelThreashould)
@@ -1095,7 +1095,7 @@ class Selenium
      *
      * @param string $expression the value to return
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function getExpression($expression)
@@ -1116,7 +1116,7 @@ class Selenium
      * @param string $script the JavaScript snippet to run
      * @param int $timeout in milliseconds, after which this command will return with an error
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function waitForCondition($script, $timeout = null)
@@ -1135,7 +1135,7 @@ class Selenium
      *
      * @param int $timeout in milliseconds, after which the action will return with an error
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function setTimeout($timeout)
@@ -1156,7 +1156,7 @@ class Selenium
      *
      * @param string $timeout a timeout in milliseconds, after which this command will return with an error
      * @access public
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     public function waitForPageToLoad($timeout = null)
@@ -1176,7 +1176,7 @@ class Selenium
      * @param string $verb
      * @param array $args
      * @access private
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     private function doCommand($verb, $args = array())
@@ -1288,7 +1288,7 @@ class Selenium
      * @param string $verb
      * @param array $arg
      * @access protected
-     * @return string on success, error object on failure
+     * @return string on success
      * @throws Selenium_Exception
      */
     private function getString($verb, $args = array())
@@ -1308,7 +1308,7 @@ class Selenium
      * @param string $verb
      * @param array $args
      * @access protected
-     * @return array on success, error object on failure
+     * @return array on success
      * @throws Selenium_Exception
      */
     private function getStringArray($verb, $args = array())
@@ -1346,7 +1346,7 @@ class Selenium
      * @param string $verb
      * @param array $args
      * @access private
-     * @return boolean on success, error object on failure
+     * @return boolean on success
      * @throws Selenium_Exception
      */
     private function getBoolean($verb, $args = array())
