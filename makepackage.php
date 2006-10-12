@@ -5,14 +5,13 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 unlink('package.xml');
 
-$releaseVersion = '0.1.4';
-$apiVersion = '0.1.0';
+$releaseVersion = '0.1.5';
+$apiVersion = '0.1.5';
 $changelog = '
-  - Removed Testing prefix from the class name. Not Testing_Selenium, but Selenium.
-  - Removed unnecessary docblock.
-  - Fixed fixed comment documents.
+  - Fixed Bug#8891. See Bug8891.php
+  - Changed method name "isTextPattern" to "isTextPresent"
   ';
-$notes = 'Fixed class name and some documents';
+$notes = 'Fixed bug';
 $packagexml = new PEAR_PackageFileManager2();
 $packagexml->setOptions(array('filelistgenerator' => 'file',
       'packagefile' => 'package2.xml',

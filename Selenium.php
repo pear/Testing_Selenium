@@ -32,7 +32,7 @@
  * @package    Selenium
  * @author     Shin Ohno <ganchiku@gmail.com>
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    0.1.4
+ * @version    0.1.5
  * @see        http://www.openqa.org/selenium-rc/
  * @since      0.1.0
  */
@@ -46,7 +46,7 @@ require_once 'Selenium/Exception.php';
  * Selenium
  *
  * @package Selenium
- * @version 0.1.4
+ * @version 0.1.5
  * @author Shin Ohno <ganchiku@gmail.com>
  */
 class Selenium

@@ -1,8 +1,13 @@
 $Id$
 see package.xml for newer changlogs
+2006-10-13  Shin Ohno<ganchiku@gmail.com>
+  * VERSION: version 0.1.5 (alpha) released.
+
+  - Fixed Bug#8891. See Bug8891.php
+  - Changed method name "isTextPattern" to "isTextPresent"
 
 2006-09-06  Shin Ohno<ganchiku@gmail.com>
-  * VERSINO: version 0.1.4 (alpha) released.
+  * VERSION: version 0.1.4 (alpha) released.
 
   - Removed Testing prefix from the class name. Not Testing_Selenium, but Selenium.
   - Removed unnecessary docblock.

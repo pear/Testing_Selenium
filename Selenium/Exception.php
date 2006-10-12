@@ -25,7 +25,7 @@ require_once 'PEAR/Exception.php';
  * @category   Testing
  * @package    Selenium
  * @author     Shin Ohno <ganchiku@gmail.com>
- * @version    0.1.4
+ * @version    0.1.5
  */
 class Selenium_Exception extends PEAR_Exception
 {
