@@ -913,7 +913,7 @@ class Selenium
         return $this->getString('getAttribute', array($attributeLocator));
     }
     // }}}
-    // {{{ isTextPattern($pattern)
+    // {{{ isTextPresent($pattern)
     /**
      * Verifies that the specified text pattern appears somewhere on the rendered page shown to the user.
      *
@@ -922,9 +922,9 @@ class Selenium
      * @return boolean on success
      * @throws Selenium_Exception
      */
-    public function isTextPattern($pattern)
+    public function isTextPresent($pattern)
     {
-        return $this->getBoolean('isTextPattern', array($pattern));
+        return $this->getBoolean('isTextPresent', array($pattern));
     }
     // }}}
     // {{{ isElementPresent($locator)
@@ -1314,7 +1314,6 @@ class Selenium
     private function getStringArray($verb, $args = array())
     {
         $csv = $this->getString($verb, $args);
-
         $token = '';
         $tokens = array();
         $letters = preg_split('//', $csv, -1, PREG_SPLIT_NO_EMPTY);
@@ -1352,7 +1351,6 @@ class Selenium
     private function getBoolean($verb, $args = array())
     {
         $result = $this->getString($verb, $args);
-
         switch ($result) {
         case 'true':
             return true;
