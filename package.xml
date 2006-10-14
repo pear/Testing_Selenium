@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
 <package version="1.0" packagerversion="1.4.9">
- <name>Selenium</name>
+ <name>Testing_Selenium</name>
  <summary>PHP Client for Selenium RC</summary>
  <description>PHP Client for Selenium RC
  </description>
@@ -20,11 +20,11 @@
   </maintainer>
   </maintainers>
  <release>
-  <version>0.1.4</version>
-  <date>2006-09-16</date>
+  <version>0.2.0</version>
+  <date>2006-10-15</date>
   <license>PHP License</license>
   <state>alpha</state>
-  <notes>Fixed class name and some documents
+  <notes>Changed package name. Selenium to Testing_Selenium.
   </notes>
   <deps>
    <dep type="php" rel="ge" version="5.1.0" optional="no"/>
@@ -32,7 +32,7 @@
    <dep type="ext" rel="has" optional="yes">curl</dep>
   </deps>
   <filelist>
-   <dir name="/" baseinstalldir="/">
+   <dir name="/" baseinstalldir="Testing">
     <dir name="examples">
      <file role="doc" name="example.php">
       <replace from="@PEAR-VER@" to="version" type="package-info"/>
@@ -177,6 +177,12 @@
        <replace from="@PEAR-VER@" to="version" type="package-info"/>
       </file>
      </dir> <!-- /tests/html -->
+     <file role="test" name="Bug8891.php">
+      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     </file>
+     <file role="test" name="Bug8893.php">
+      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     </file>
      <file role="test" name="SeleniumTest.php">
       <replace from="@PEAR-VER@" to="version" type="package-info"/>
      </file>
@@ -238,8 +244,25 @@
     <license>PHP License</license>
     <state>alpha</state>
     <notes>- Removed Testing prefix from the class name. Not Testing_Selenium, but Selenium.
-  - Removed unnecessary docblock.
-  - Fixed fixed comment documents.
+- Removed unnecessary docblock.
+- Fixed fixed comment documents.
+    </notes>
+   </release>
+   <release>
+    <version>0.1.5</version>
+    <date>2006-10-13</date>
+    <license>PHP License</license>
+    <state>alpha</state>
+    <notes>- Fixed Bug#8891. See Bug8891.php
+- Changed method name &quot;isTextPattern&quot; to &quot;isTextPresent&quot;
+    </notes>
+   </release>
+   <release>
+    <version>0.2.0</version>
+    <date>2006-10-15</date>
+    <license>PHP License</license>
+    <state>alpha</state>
+    <notes>- Changed package name. Selenium to Testing_Selenium.
     </notes>
    </release>
  </changelog>

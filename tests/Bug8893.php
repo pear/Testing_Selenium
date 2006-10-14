@@ -1,5 +1,5 @@
 <?php
-require_once '../Selenium.php';
+require_once 'Testing/Selenium.php';
 require_once 'PHPUnit2/Framework/TestCase.php';
 
 class Bug8893 extends PHPUnit2_Framework_TestCase
@@ -16,7 +16,7 @@ class Bug8893 extends PHPUnit2_Framework_TestCase
     public function setUp()
     {
         try {
-            $this->selenium = new Selenium("*firefox", $this->browserUrl);
+            $this->selenium = new Testing_Selenium("*firefox", $this->browserUrl);
             $this->selenium->start();
         } catch (Selenium_Exception $e) {
             $this->selenium->stop();

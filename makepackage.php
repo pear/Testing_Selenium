@@ -5,18 +5,17 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 unlink('package.xml');
 
-$releaseVersion = '0.1.5';
-$apiVersion = '0.1.5';
+$releaseVersion = '0.2.0';
+$apiVersion = '0.2.0';
 $changelog = '
-  - Fixed Bug#8891. See Bug8891.php
-  - Changed method name "isTextPattern" to "isTextPresent"
+  - Changed package name. Selenium to Testing_Selenium.
   ';
-$notes = 'Fixed bug';
+$notes = 'Changed package name. Selenium to Testing_Selenium.';
 $packagexml = new PEAR_PackageFileManager2();
 $packagexml->setOptions(array('filelistgenerator' => 'file',
       'packagefile' => 'package2.xml',
       'packagedirectory' => dirname(__FILE__),
-      'baseinstalldir' => '/',
+      'baseinstalldir' => 'Testing',
       'ignore' => array('makepackage.php', 'Documentation/', 'ver/', 'CVS/'),
       'simpleoutput' => true,
       'changelogoldtonew' => true,
@@ -28,7 +27,7 @@ $packagexml->setOptions(array('filelistgenerator' => 'file',
 $packagexml->setPackageType('php');
 $packagexml->addRelease();
 $packagexml->setChannel('pear.php.net');
-$packagexml->setPackage('Selenium');
+$packagexml->setPackage('Testing_Selenium');
 $packagexml->setReleaseVersion($releaseVersion);
 $packagexml->setAPIVersion($apiVersion);
 $packagexml->setReleaseStability('alpha');

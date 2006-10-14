@@ -1,6 +1,10 @@
 $Id$
 see package.xml for newer changlogs
 2006-10-13  Shin Ohno<ganchiku@gmail.com>
+  * VERSION: version 0.2.0 (alpha) released.
+  - Changed package name. Selenium to Testing_Selenium.
+
+2006-10-13  Shin Ohno<ganchiku@gmail.com>
   * VERSION: version 0.1.5 (alpha) released.
 
   - Fixed Bug#8891. See Bug8891.php

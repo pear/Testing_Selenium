@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_ALL|E_STRICT);
-require_once 'Selenium.php';
+require_once 'Testing/Selenium.php';
 try {
-    $selenium = new Selenium("*firefox", "http://pear.php.net/");
+    $selenium = new Testing_Selenium("*firefox", "http://pear.php.net/");
     $result = $selenium->start();
     $selenium->open("http://pear.php.net/packages.php");
     if ($selenium->getTitle() == "PEAR :: Package Browser :: Top Level") {
@@ -28,7 +28,7 @@ try {
 /*
 // To see this example, you need to have Simpletest library.
 // You can't run simpletest with E_STRICT
-require_once 'Selenium.php';
+require_once 'Testing/Selenium.php';
 require_once 'simpletest/unit_tester.php';
 require_once 'simpletest/reporter.php';
 
@@ -36,7 +36,7 @@ class Example extends UnitTestCase
 {
     function setUp()
     {
-        $this->selenium = new Selenium("*firefox", "http://pear.php.net/");
+        $this->selenium = new Testing_Selenium("*firefox", "http://pear.php.net/");
         $result = $this->selenium->start();
     }
     function tearDown()
@@ -60,7 +60,7 @@ $test->run(new TextReporter());
 /* With PHP_Unit2
 // To see this example, you need to have PHPUnit library.
 error_reporting(E_ALL|E_STRICT);
-require_once 'Selenium.php';
+require_once 'Testing/Selenium.php';
 require_once 'PHPUnit2/Framework/TestCase.php';
 
 class Example extends PHPUnit2_Framework_TestCase
@@ -71,7 +71,7 @@ class Example extends PHPUnit2_Framework_TestCase
     }
     function setUp()
     {
-        $this->selenium = new Selenium("*firefox", "http://pear.php.net/");
+        $this->selenium = new Testing_Selenium("*firefox", "http://pear.php.net/");
             // XXX pear does not work E_STRICT because of HTTP_Request
             // the options are "curl", "pear", "native"
             // $this->selenium->setDriver("pear");

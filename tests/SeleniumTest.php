@@ -3,7 +3,7 @@
 // Selenium RC Server is available the following website.
 // http://openqa.org/selenium-rc/
 //error_reporting(E_ALL|E_STRICT);
-require_once 'Selenium.php';
+require_once 'Testing/Selenium.php';
 require_once 'PHPUnit2/Framework/TestCase.php';
 
 class SeleniumTest extends PHPUnit2_Framework_TestCase
@@ -26,12 +26,12 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
     public function setUp()
     {
         try {
-            $this->selenium = new Selenium("*firefox", $this->browserUrl);
+            $this->selenium = new Testing_Selenium("*firefox", $this->browserUrl);
             // XXX pear does not work E_STRICT because of HTTP_Request
             // the options are "curl", "pear", "native"
 //            $this->selenium->setDriver("pear");
             $this->selenium->start();
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -41,7 +41,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
     {
         try {
            $this->selenium->stop();
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             echo $e;
         }
     }
@@ -57,13 +57,12 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->open("{$this->testUrl}/html/test_page.slow.html");
             $this->assertEquals("{$this->testUrl}/html/test_page.slow.html", $this->selenium->getLocation());
             $this->assertEquals("Slow Loading Page", $this->selenium->getTitle());
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
     }
     // }}}
-/*
     // {{{ testClick
     public function testClick()
     {
@@ -94,7 +93,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->click("linkWithOnclickReturnsFalse");
             $this->assertEquals("Click Page 1", $this->selenium->getTitle());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -123,7 +122,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 
             $this->selenium->click("enclosedImage");
             $this->assertEquals("enclosedImage clicked", $this->selenium->getAlert());
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -145,7 +144,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertRegExp("/Welcome, TestUser!/", $this->selenium->getText("//h2"));
 
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -182,7 +181,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->select("theSelect", "");
             $this->assertEquals("", $this->selenium->getSelectedLabel("theSelect"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -218,7 +217,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals(2, count($this->selenium->getSelectedLabels("theSelect")));
 
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -239,7 +238,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("onsubmit called", $this->selenium->getAlert());
             $this->assertEquals("form submitted", $this->selenium->getAlert());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -271,7 +270,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertNotEquals("on", $this->selenium->getValue("option-chilli"));
 
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -305,7 +304,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("{$this->testUrl}/html/test_select_window_popup.html", $this->selenium->getLocation());
             $this->selenium->click("closePage");
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -327,7 +326,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->type("theText", "javascript{10 * 5}");
             $this->assertEquals("50", $this->selenium->getValue("theText"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -363,7 +362,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->waitForPageToLoad();
             $this->assertEquals("Slow Loading Page", $this->selenium->getTitle());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -393,7 +392,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 
             $this->selenium->close();
             $this->selenium->selectWindow("null");
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -445,7 +444,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertFalse($this->selenium->isElementPresent("dom=document.links[9]"));
             $this->assertFalse($this->selenium->isElementPresent("dom=foo"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -468,7 +467,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("banner", $this->selenium->getText("//img[contains(@src, 'banner.gif')]/@alt"));
             $this->assertEquals("this is the second element", $this->selenium->getText("//body/a[2]"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -495,7 +494,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 
             $this->selenium->click("//input[@name='name2' and @value='yes']");
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -516,7 +515,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->waitForPageToLoad();
             $this->assertEquals("Click Page 1", $this->selenium->getTitle());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -543,7 +542,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 //            $this->selenium->waitForPageToLoad();
 //            $this->assertNotEquals("Changed the text", $this->selenium->getText("theSpan"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -564,7 +563,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("link clicked", $this->selenium->getAlert());
             $this->selenium->click("theButton");
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -583,7 +582,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->click("theSubmit");
             $this->assertEquals("{focus(theSubmit)} {click(theSubmit)} {submit} {blur(theSubmit)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -612,7 +611,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("{focus(theSelect)} {change(theSelect)} {blur(theSelect)}", $this->selenium->getValue("eventlog"));
 
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -645,7 +644,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("on", $this->selenium->getValue("theRadio2"));
             $this->assertEquals("{focus(theRadio2)} {click(theRadio2)} {blur(theRadio2)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -668,7 +667,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("off", $this->selenium->getValue("theCheckbox"));
             $this->assertEquals("{focus(theCheckbox)} {click(theCheckbox)} {change(theCheckbox)} {blur(theCheckbox)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -691,7 +690,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("changed value", $this->selenium->getValue("theTextbox"));
             $this->assertEquals("{focus(theTextbox)} {select(theTextbox)} {change(theTextbox)} {blur(theTextbox)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -713,7 +712,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 
             $this->selenium->type("theTextbox", "changed value");
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -730,7 +729,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->mouseDown("theButton");
             $this->assertEquals("{mouseover(theTextbox)} {mouseover(theButton)} {mousedown(theTextbox)} {mousedown(theButton)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -747,7 +746,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->keyDown("theTextbox", "98");
             $this->assertEquals("{keypress(theTextbox - 119)} {keypress(theTextbox - 115)} {keyup(theTextbox - 44)} {keydown(theTextbox - 98)}", $this->selenium->getValue("eventlog"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -761,7 +760,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->selenium->type("testInput", "test");
             $this->assertEquals("Bad value", $this->selenium->getAlert());
             $this->selenium->type("testInput", "somethingelse");
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -786,7 +785,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
 //            $this->assertEquals("I'm Melting! I'm Melting!", $this->selenium->getAlert());
 
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -808,7 +807,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("You are about to go to a dummy page.", $this->selenium->getConfirmation());
             $this->assertEquals("Dummy Page", $this->selenium->getTitle());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -832,7 +831,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertEquals("Type 'yes' and click OK", $this->selenium->getPrompt());
             $this->assertEquals("Dummy Page", $this->selenium->getTitle());
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -853,7 +852,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertFalse($this->selenium->isVisible("suppressedSubElement"));
             $this->assertFalse($this->selenium->isVisible("jsHiddenParagraph"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -869,7 +868,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
             $this->assertFalse($this->selenium->isEditable("disabled_text"));
             $this->assertFalse($this->selenium->isEditable("disabled_select"));
 
-        } catch (Selenium_Exception $e) {
+        } catch (Testing_Selenium_Exception $e) {
             $this->selenium->stop();
             echo $e;
         }
@@ -887,6 +886,7 @@ class SeleniumTest extends PHPUnit2_Framework_TestCase
     //    public function testCommandError
     //    {}
     // }}}
+/*
      */
 }
 ?>
