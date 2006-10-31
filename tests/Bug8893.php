@@ -1,8 +1,8 @@
 <?php
 require_once 'Testing/Selenium.php';
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
-class Bug8893 extends PHPUnit2_Framework_TestCase
+class Bug8893 extends PHPUnit_Framework_TestCase
 {
     private $selenium;
 
@@ -33,7 +33,6 @@ class Bug8893 extends PHPUnit2_Framework_TestCase
         }
     }
     // }}}
-    // {{{ testOpen
     public function test8893()
     {
         try {
@@ -44,6 +43,5 @@ class Bug8893 extends PHPUnit2_Framework_TestCase
             echo $e;
         }
     }
-    // }}}
 }
 ?>

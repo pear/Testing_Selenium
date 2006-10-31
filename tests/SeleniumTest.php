@@ -1,12 +1,12 @@
 <?php
-// To run this test, You need to install PHPUnit2 and Selenium RC Server
+// To run this test, You need to install PHPUnit and Selenium RC Server
 // Selenium RC Server is available the following website.
 // http://openqa.org/selenium-rc/
 //error_reporting(E_ALL|E_STRICT);
 require_once 'Testing/Selenium.php';
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
-class SeleniumTest extends PHPUnit2_Framework_TestCase
+class SeleniumTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
 
