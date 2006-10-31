@@ -32,9 +32,8 @@
  * @package    Testing_Selenium
  * @author     Shin Ohno <ganchiku@gmail.com>
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    0.2.0
+ * @version    @package_version@
  * @see        http://www.openqa.org/selenium-rc/
- * @since      0.2.0
  */
 
 /**
@@ -46,7 +45,7 @@ require_once 'Testing/Selenium/Exception.php';
  * Selenium
  *
  * @package Testing_Selenium
- * @version 0.2.0
+ * @version @package_version@
  * @author Shin Ohno <ganchiku@gmail.com>
  */
 class Testing_Selenium
@@ -140,13 +139,16 @@ class Testing_Selenium
     /**
      * Run the browser and set session id.
      *
+     * @param string $sessionId
      * @access public
      * @return string on success
      * @throws Testing_Selenium_Exception
      */
-    public function start()
+    public function start($sessionId = null)
     {
-        $this->sessionId = $this->getString('getNewBrowserSession', array($this->browser, $this->browserUrl));
+        if (is_null($sessionId)) {
+            $this->sessionId = $this->getString('getNewBrowserSession', array($this->browser, $this->browserUrl));
+        }
         return $this->sessionId;
     }
     // }}}
@@ -1181,10 +1183,10 @@ class Testing_Selenium
      */
     private function doCommand($verb, $args = array())
     {
-        $url = sprintf('http://%s:%s/selenium-server/driver/?cmd=%s', $this->host, $this->port, htmlspecialchars($verb));
+        $url = sprintf('http://%s:%s/selenium-server/driver/?cmd=%s', $this->host, $this->port, urlencode($verb));
         for ($i = 0; $i < count($args); $i++) {
             $argNum = strval($i + 1);
-            $url .= sprintf('&%s=%s', $argNum, htmlspecialchars($args[$i]));
+            $url .= sprintf('&%s=%s', $argNum, urlencode(trim($args[$i])));
         }
 
         if (isset($this->sessionId)) {
