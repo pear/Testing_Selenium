@@ -139,17 +139,13 @@ class Testing_Selenium
     /**
      * Run the browser and set session id.
      *
-     * @param string $sessionId
      * @access public
-     * @return string on success
+     * @return void
      * @throws Testing_Selenium_Exception
      */
-    public function start($sessionId = null)
+    public function start()
     {
-        if (is_null($sessionId)) {
-            $this->sessionId = $this->getString('getNewBrowserSession', array($this->browser, $this->browserUrl));
-        }
-        return $this->sessionId;
+        $this->sessionId = $this->getString('getNewBrowserSession', array($this->browser, $this->browserUrl));
     }
     // }}}
     // {{{ stop
@@ -157,7 +153,7 @@ class Testing_Selenium
      * Close the browser and set session id null
      *
      * @access public
-     * @return string on success
+     * @return void
      * @throws Testing_Selenium_Exception
      */
     public function stop()
