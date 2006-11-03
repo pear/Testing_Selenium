@@ -2,9 +2,9 @@ $Id$
 see package.xml for newer changlogs
 2006-10-30  Shin Ohno<ganchiku@gmail.com>
   * VERSION: version 0.2.1 (alpha) released.
-  - Fixed Bug #9189. See Bug9189.php. whitespece is trimed by Selenium RC.
-  - Added Req #9120 feature.
-  - Bug #9119 is not fixed yet.. I'm working on it.
+  - Fixed Bug #9189. See Bug9189.php. Trim whitespace in doCommand.
+  - Fixed Bug #9119. See Bug9119.php. Use urlencode() instead htmlspecialchars() in doCommand.
+  - Changed Test Website http://www.unchiku.com/ to http://www.ganchiku.com/
 
 2006-10-13  Shin Ohno<ganchiku@gmail.com>
   * VERSION: version 0.2.0 (alpha) released.
