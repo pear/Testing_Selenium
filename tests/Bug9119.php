@@ -2,7 +2,7 @@
 require_once '../Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
-class Bug9189 extends PHPUnit_Framework_TestCase
+class Bug9119 extends PHPUnit_Framework_TestCase
 {
     private $selenium;
 
@@ -10,13 +10,15 @@ class Bug9189 extends PHPUnit_Framework_TestCase
     {
         parent::__construct($name);
     }
-    public function test9189()
+    public function test9119()
     {
         try {
             $selenium = new Testing_Selenium("*firefox", "http://www.ganchiku.com/");
             $selenium->start();
-            $selenium->open("http://www.ganchiku.com/selenium/tests/html/bug9189.html");
-            $selenium->select('parent_cat', 'Test Category 001');
+            $selenium->open("http://www.ganchiku.com/selenium/tests/html/bug9119.html");
+
+            $selenium->click('link=foo#bar');
+            $this->assertTrue($selenium->isAlertPresent());
             $selenium->stop();
 
         } catch (Selenium_Exception $e) {

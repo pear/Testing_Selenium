@@ -1,5 +1,5 @@
 <?php
-require_once 'Testing/Selenium.php';
+require_once '../Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 class Bug8893 extends PHPUnit_Framework_TestCase

@@ -2,8 +2,8 @@
 // To run this test, You need to install PHPUnit and Selenium RC Server
 // Selenium RC Server is available the following website.
 // http://openqa.org/selenium-rc/
-//error_reporting(E_ALL|E_STRICT);
-require_once 'Testing/Selenium.php';
+error_reporting(E_ALL|E_STRICT);
+require_once '../Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 class SeleniumTest extends PHPUnit_Framework_TestCase
@@ -15,11 +15,11 @@ class SeleniumTest extends PHPUnit_Framework_TestCase
         // The URL you are going to test
         // Please install tests the following URL or edit the URI
         // http://localhost/tests/
-        // unchiku.com is just for the initial testing.
-        $this->browserUrl = "http://www.unchiku.com/";
+        // ganchiku.com is just for the initial testing.
+        $this->browserUrl = "http://www.ganchiku.com/";
 //        $this->browserUrl = "http://yourserver/";
         // The path for the tests
-        $this->testUrl = $this->browserUrl . "tests";
+        $this->testUrl = $this->browserUrl . "selenium/tests";
         parent::__construct($name);
     }
 // {{{ setUp and tearDown

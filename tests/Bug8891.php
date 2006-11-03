@@ -1,5 +1,5 @@
 <?php
-require_once 'Testing/Selenium.php';
+require_once '../Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 class Bug8891 extends PHPUnit_Framework_TestCase
@@ -8,8 +8,8 @@ class Bug8891 extends PHPUnit_Framework_TestCase
 
     public function __construct($name)
     {
-        $this->browserUrl = "http://www.unchiku.com/";
-        $this->testUrl = $this->browserUrl . "tests";
+        $this->browserUrl = "http://www.ganchiku.com/";
+        $this->testUrl = $this->browserUrl . "selenium/tests";
         parent::__construct($name);
     }
 // {{{ setUp and tearDown
