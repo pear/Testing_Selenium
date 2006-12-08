@@ -24,31 +24,31 @@ class BugTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-      try {
-        $this->selenium->stop();
-    } catch (Testing_Selenium_Exception $e) {
-      echo $e;
-    }
+        try {
+            $this->selenium->stop();
+        } catch (Testing_Selenium_Exception $e) {
+            echo $e;
+        }
     }
     // {{{ Bug #8893
     public function test8893()
     {
-      try {
-        $this->selenium->open($this->browserUrl . '/html/test_open.html');
+        try {
+            $this->selenium->open($this->browserUrl . '/html/bug8893.html');
 
-        // The default is glob
-        $this->assertFalse($this->selenium->isTextPresent('Foo'));
-        $this->assertTrue($this->selenium->isTextPresent('This*'));
-        $this->assertTrue($this->selenium->isTextPresent('This?is'));
-        $this->assertTrue($this->selenium->isTextPresent('T?????'));
+            // The default is glob
+            $this->assertFalse($this->selenium->isTextPresent('Foo'));
+            $this->assertTrue($this->selenium->isTextPresent('This*'));
+            $this->assertTrue($this->selenium->isTextPresent('This?is'));
+            $this->assertTrue($this->selenium->isTextPresent('T?????'));
 
-        // To use JavaScrpt regexp, speicify regexp: as follows:
-        $this->assertTrue($this->selenium->isTextPresent('regexp:^This'));
-        $this->assertTrue($this->selenium->isTextPresent('regexp:^Th.s'));
+            // To use JavaScrpt regexp, speicify regexp: as follows:
+            $this->assertTrue($this->selenium->isTextPresent('regexp:^This'));
+            $this->assertTrue($this->selenium->isTextPresent('regexp:^Th.s'));
 
-      } catch (Selenium_Exception $e) {
-        echo $e;
-      }
+        } catch (Selenium_Exception $e) {
+            echo $e;
+        }
     }
     // }}}
 
@@ -73,8 +73,8 @@ class BugTest extends PHPUnit_Framework_TestCase
             $this->selenium->open($this->browserUrl . '/html/bug9189.html');
             $this->selenium->select('parent_cat', ' Test Category 001');
             $this->assertEquals('Test Category 001', $this->selenium->getSelectedLabel('parent_cat'));
-//            $selenium->select('parent_cat', '&nbsp;Test Category 001-1');
-//            $this->assertEquals('&Test Category 001-1', $selenium->getSelectedLabel('parent_cat'));
+            //            $selenium->select('parent_cat', '&nbsp;Test Category 001-1');
+            //            $this->assertEquals('&Test Category 001-1', $selenium->getSelectedLabel('parent_cat'));
         } catch (Selenium_Exception $e) {
             echo $e;
         }
