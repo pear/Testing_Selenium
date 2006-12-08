@@ -1,39 +1,32 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
-/**
- * PHP Client for the Selenium Remote Control test tool
+/** Copyright 2006 ThoughtWorks, Inc
  *
- * Selenium Remote Control (SRC) is a test tool that allows you to write
- * automated web application UI tests in any programming language against
- * any HTTP website using any mainstream JavaScript-enabled browser.  SRC
- * provides a Selenium Server, which can automatically start/stop/control
- * any supported browser. It works by using Selenium Core, a pure-HTML+JS
- * library that performs automated tasks in JavaScript; the Selenium
- * Server communicates directly with the browser using AJAX
- * (XmlHttpRequest).
- * L<http://www.openqa.org/selenium-rc/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This module sends commands directly to the Server using simple HTTP
- * GET/POST requests.  Using this module together with the Selenium
- * Server, you can automatically control any supported browser.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * To use this module, you need to have already downloaded and started
- * the Selenium Server.  (The Selenium Server is a Java application.)
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
+ * -----------------
+ * This file has been automatically generated via XSL
+ * -----------------
+ *
  *
  *
  * @category   Testing
- * @package    Testing_Selenium
- * @author     Shin Ohno <ganchiku@gmail.com>
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @package    Selenium
+ * @author     Shin Ohno <ganchiku at gmail dot com>
+ * @author     Bjoern Schotte <schotte at mayflower dot de>
+ * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License, Version 2.0
  * @version    @package_version@
  * @see        http://www.openqa.org/selenium-rc/
+ * @since      0.1
  */
 
 /**
@@ -42,15 +35,231 @@
 require_once 'Testing/Selenium/Exception.php';
 
 /**
- * Selenium
+ * Defines an object that runs Selenium commands.
+ * 
+ * 
+ * <p>
+ * <b>Element Locators</b>
+ * </p><p>
+ * 
+ * Element Locators tell Selenium which HTML element a command refers to.
+ * The format of a locator is:
+ * </p><p>
+ * 
+ * <i>locatorType</i><b>=</b><i>argument</i>
+ * </p>
+ * <p>
+ * 
+ * We support the following strategies for locating elements:
+ * 
+ * </p>
+ * <ul>
+ * 
+ * <li>
+ * <b>identifier</b>=<i>id</i>: 
+ * Select the element with the specified @id attribute. If no match is
+ * found, select the first element whose @name attribute is <i>id</i>.
+ * (This is normally the default; see below.)
+ * </li>
+ * <li>
+ * <b>id</b>=<i>id</i>:
+ * Select the element with the specified @id attribute.
+ * </li>
+ * <li>
+ * <b>name</b>=<i>name</i>:
+ * Select the first element with the specified @name attribute.
+ * 
+ * <ul>
+ * 
+ * <li>
+ * username
+ * </li>
+ * <li>
+ * name=username
+ * </li>
+ * </ul>
+<p>
+ * The name may optionally be followed by one or more <i>element-filters</i>, separated from the name by whitespace.  If the <i>filterType</i> is not specified, <b>value</b> is assumed.
+ * </p>
+ * <ul>
+ * 
+ * <li>
+ * name=flavour value=chocolate
+ * </li>
+ * </ul>
+ * </li>
+ * <li>
+ * <b>dom</b>=<i>javascriptExpression</i>: 
+ * 
+ * Find an element by evaluating the specified string.  This allows you to traverse the HTML Document Object
+ * Model using JavaScript.  Note that you must not return a value in this string; simply make it the last expression in the block.
+ * 
+ * <ul>
+ * 
+ * <li>
+ * dom=document.forms['myForm'].myDropdown
+ * </li>
+ * <li>
+ * dom=document.images[56]
+ * </li>
+ * <li>
+ * dom=function foo() { return document.links[1]; }; foo();
+ * </li>
+ * </ul>
+ * </li>
+ * <li>
+ * <b>xpath</b>=<i>xpathExpression</i>: 
+ * Locate an element using an XPath expression.
+ * 
+ * <ul>
+ * 
+ * <li>
+ * xpath=//img[@alt='The image alt text']
+ * </li>
+ * <li>
+ * xpath=//table[@id='table1']//tr[4]/td[2]
+ * </li>
+ * <li>
+ * xpath=//a[contains(@href,'#id1')]
+ * </li>
+ * <li>
+ * xpath=//a[contains(@href,'#id1')]/@class
+ * </li>
+ * <li>
+ * xpath=(//table[@class='stylee'])//th[text()='theHeaderText']/../td
+ * </li>
+ * <li>
+ * xpath=//input[@name='name2' and @value='yes']
+ * </li>
+ * <li>
+ * xpath=//*[text()="right"]
+ * </li>
+ * </ul>
+ * </li>
+ * <li>
+ * <b>link</b>=<i>textPattern</i>:
+ * Select the link (anchor) element which contains text matching the
+ * specified <i>pattern</i>.
+ * 
+ * <ul>
+ * 
+ * <li>
+ * link=The link text
+ * </li>
+ * </ul>
+ * </li>
+ * <li>
+ * <b>css</b>=<i>cssSelectorSyntax</i>:
+ * Select the element using css selectors. Please refer to CSS2 selectors, CSS3 selectors for more information. You can also check the TestCssLocators test in the selenium test suite for an example of usage, which is included in the downloaded selenium core package.
+ * 
+ * <ul>
+ * 
+ * <li>
+ * css=a[href="#id3"]
+ * </li>
+ * <li>
+ * css=span#firstChild + span
+ * </li>
+ * </ul>
+<p>
+ * Currently the css selector locator supports all css1, css2 and css3 selectors except namespace in css3, some pseudo classes(:nth-of-type, :nth-last-of-type, :first-of-type, :last-of-type, :only-of-type, :visited, :hover, :active, :focus, :indeterminate) and pseudo elements(::first-line, ::first-letter, ::selection, ::before, ::after). 
+ * </p>
+ * </li>
+ * </ul><p>
+ * 
+ * Without an explicit locator prefix, Selenium uses the following default
+ * strategies:
+ * 
+ * </p>
+ * <ul>
+ * 
+ * <li>
+ * <b>dom</b>, for locators starting with "document."
+ * </li>
+ * <li>
+ * <b>xpath</b>, for locators starting with "//"
+ * </li>
+ * <li>
+ * <b>identifier</b>, otherwise
+ * </li>
+ * </ul>
+ * <p>
+ * <b>Element Filters</b>
+ * </p><p>
+ * 
+ * <p>
+ * Element filters can be used with a locator to refine a list of candidate elements.  They are currently used only in the 'name' element-locator.
+ * </p>
+<p>
+ * Filters look much like locators, ie.
+ * </p>
+<p>
+ * 
+ * <i>filterType</i><b>=</b><i>argument</i>
+ * </p>
+ * <p>
+ * Supported element-filters are:
+ * </p>
+<p>
+ * <b>value=</b><i>valuePattern</i>
+ * </p>
+<p>
+ * 
+ * 
+ * Matches elements based on their values.  This is particularly useful for refining a list of similarly-named toggle-buttons.
+ * </p>
+ * <p>
+ * <b>index=</b><i>index</i>
+ * </p>
+<p>
+ * 
+ * 
+ * Selects a single element based on its position in the list (offset from zero).
+ * </p>
+ * 
+ * </p>
+ * 
+ * <p>
+ * <b>String-match Patterns</b>
+ * </p><p>
+ * 
+ * Various Pattern syntaxes are available for matching string values:
+ * 
+ * </p>
+ * <ul>
+ * 
+ * <li>
+ * <b>glob:</b><i>pattern</i>:
+ * Match a string against a "glob" (aka "wildmat") pattern. "Glob" is a
+ * kind of limited regular-expression syntax typically used in command-line
+ * shells. In a glob pattern, "*" represents any sequence of characters, and "?"
+ * represents any single character. Glob patterns match against the entire
+ * string.
+ * </li>
+ * <li>
+ * <b>regexp:</b><i>regexp</i>:
+ * Match a string using a regular-expression. The full power of JavaScript
+ * regular-expressions is available.
+ * </li>
+ * <li>
+ * <b>exact:</b><i>string</i>:
+ * 
+ * Match a string exactly, verbatim, without any of that fancy wildcard
+ * stuff.
+ * </li>
+ * </ul><p>
+ * 
+ * If no pattern prefix is specified, Selenium assumes that it's a "glob"
+ * pattern.
+ * 
+ * </p>
  *
- * @package Testing_Selenium
- * @version @package_version@
- * @author Shin Ohno <ganchiku@gmail.com>
+ * @package Selenium
+ * @author Shin Ohno <ganchiku at gmail dot com>
+ * @author Bjoern Schotte <schotte at mayflower dot de>
  */
 class Testing_Selenium
 {
-    // {{{ class vars
     /**
      * @var    string
      * @access private
@@ -92,8 +301,7 @@ class Testing_Selenium
      * @access private
      */
     private $driver;
-    // }}}
-    // {{{ __construct($browser, $browserUrl, $host, $port, $timeout, $driver)
+
     /**
      * Constructor
      *
@@ -106,7 +314,7 @@ class Testing_Selenium
      * @access public
      * @throws Testing_Selenium_Exception
      */
-    function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000, $driver = 'curl')
+    public function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000, $driver = 'native')
     {
         $this->browser = $browser;
         $this->browserUrl = $browserUrl;
@@ -115,9 +323,7 @@ class Testing_Selenium
         $this->timeout = $timeout;
         $this->setDriver($driver);
     }
-    // }}}
-    // {{{ public methods
-    // {{{ setDriver
+
     /**
      * Set driver for HTTP Request.
      *
@@ -128,333 +334,744 @@ class Testing_Selenium
      */
     public function setDriver($driver)
     {
-        if ($driver == 'curl' or $driver == 'pear' or $driver == 'native') {
+        if ($driver == 'curl' or $driver == 'native') {
             $this->driver = $driver;
         } else {
-            throw new Testing_Selenium_Exception('Driver has to be "curl" or "pear" or "native"');
+            throw new Testing_Selenium_Exception('Driver has to be "curl" or "native"');
         }
     }
-    // }}}
-    // {{{ start
+
     /**
      * Run the browser and set session id.
      *
      * @access public
      * @return void
-     * @throws Testing_Selenium_Exception
      */
     public function start()
     {
-        $this->sessionId = $this->getString('getNewBrowserSession', array($this->browser, $this->browserUrl));
+        $this->sessionId = $this->getString("getNewBrowserSession", array($this->browser, $this->browserUrl));
+        return $this->sessionId;
     }
-    // }}}
-    // {{{ stop
     /**
      * Close the browser and set session id null
      *
      * @access public
      * @return void
-     * @throws Testing_Selenium_Exception
      */
     public function stop()
     {
-        $result = $this->doCommand('testComplete');
+        $this->doCommand("testComplete");
         $this->sessionId = null;
     }
-    // }}}
-    // {{{ click($locator)
+
+  
     /**
      * Clicks on a link, button, checkbox or radio button. If the click action
-     * cause a new page to load (like a link usually does), call waitForPageToLoad.
+     * causes a new page to load (like a link usually does), call
+     * waitForPageToLoad.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
      */
     public function click($locator)
     {
-        $this->doCommand('click', array($locator));
+        $this->doCommand("click", array($locator));
     }
-    // }}}
-    // {{{ fireEvent($locator, $eventName)
+
+
     /**
-     * Explicitly simulate an event, to trigger the corresponding "on<em>event</em>"
-     * handler
+     * Double clicks on a link, button, checkbox or radio button. If the double click action
+     * causes a new page to load (like a link usually does), call
+     * waitForPageToLoad.
      *
+     * @access public
+     * @param string $locator an element locator
+     */
+    public function doubleClick($locator)
+    {
+        $this->doCommand("doubleClick", array($locator));
+    }
+
+
+    /**
+     * Clicks on a link, button, checkbox or radio button. If the click action
+     * causes a new page to load (like a link usually does), call
+     * waitForPageToLoad.
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $coordString specifies the x,y position (i.e. - 10,20) of the mouse      event relative to the element returned by the locator.
+     */
+    public function clickAt($locator, $coordString)
+    {
+        $this->doCommand("clickAt", array($locator, $coordString));
+    }
+
+
+    /**
+     * Doubleclicks on a link, button, checkbox or radio button. If the action
+     * causes a new page to load (like a link usually does), call
+     * waitForPageToLoad.
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $coordString specifies the x,y position (i.e. - 10,20) of the mouse      event relative to the element returned by the locator.
+     */
+    public function doubleClickAt($locator, $coordString)
+    {
+        $this->doCommand("doubleClickAt", array($locator, $coordString));
+    }
+
+
+    /**
+     * Explicitly simulate an event, to trigger the corresponding "on<i>event</i>"
+     * handler.
+     *
+     * @access public
      * @param string $locator an element locator
      * @param string $eventName the event name, e.g. "focus" or "blur"
-     * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function fireEvent($locator, $eventName)
     {
-        $this->doCommand('fireEvent', array($locator, $eventName));
+        $this->doCommand("fireEvent", array($locator, $eventName));
     }
-    // }}}
-    // {{{ keyPress($locator, $keycode)
+
+
     /**
      * Simulates a user pressing and releasing a key.
      *
-     * @param string $locator an element locator
-     * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @param string $keySequence Either be a string("\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "w", "\119".
      */
-    public function keyPress($locator, $keycode)
+    public function keyPress($locator, $keySequence)
     {
-        $this->doCommand('keyPress', array($locator, $keycode));
+        $this->doCommand("keyPress", array($locator, $keySequence));
     }
-    // }}}
-    // {{{ keyDown($locator, $keycode)
+
+
     /**
-     * Simulates a user pressing and pressing a key (without releasing it yet).
+     * Press the shift key and hold it down until doShiftUp() is called or a new page is loaded.
      *
-     * @param string $locator an element locator
-     * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
-    public function keyDown($locator, $keycode)
+    public function shiftKeyDown()
     {
-        $this->doCommand('keyDown', array($locator, $keycode));
+        $this->doCommand("shiftKeyDown", array());
     }
-    // }}}
-    // {{{ keyUp($locator, $keycode)
+
+
     /**
-     * Simulates a user releasing a key
+     * Release the shift key.
      *
-     * @param string $locator an element locator
-     * @param string $keycode the numeric keycode of the key to be pressed, normally the ASCII value of that key.
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
-    public function keyUp($locator, $keycode)
+    public function shiftKeyUp()
     {
-        $this->doCommand('keyUp', array($locator, $keycode));
+        $this->doCommand("shiftKeyUp", array());
     }
-    // }}}
-    // {{{ mouseOver($locator)
+
+
+    /**
+     * Press the meta key and hold it down until doMetaUp() is called or a new page is loaded.
+     *
+     * @access public
+     */
+    public function metaKeyDown()
+    {
+        $this->doCommand("metaKeyDown", array());
+    }
+
+
+    /**
+     * Release the meta key.
+     *
+     * @access public
+     */
+    public function metaKeyUp()
+    {
+        $this->doCommand("metaKeyUp", array());
+    }
+
+
+    /**
+     * Press the alt key and hold it down until doAltUp() is called or a new page is loaded.
+     *
+     * @access public
+     */
+    public function altKeyDown()
+    {
+        $this->doCommand("altKeyDown", array());
+    }
+
+
+    /**
+     * Release the alt key.
+     *
+     * @access public
+     */
+    public function altKeyUp()
+    {
+        $this->doCommand("altKeyUp", array());
+    }
+
+
+    /**
+     * Press the control key and hold it down until doControlUp() is called or a new page is loaded.
+     *
+     * @access public
+     */
+    public function controlKeyDown()
+    {
+        $this->doCommand("controlKeyDown", array());
+    }
+
+
+    /**
+     * Release the control key.
+     *
+     * @access public
+     */
+    public function controlKeyUp()
+    {
+        $this->doCommand("controlKeyUp", array());
+    }
+
+
+    /**
+     * Simulates a user pressing a key (without releasing it yet).
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $keySequence Either be a string("\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "w", "\119".
+     */
+    public function keyDown($locator, $keySequence)
+    {
+        $this->doCommand("keyDown", array($locator, $keySequence));
+    }
+
+
+    /**
+     * Simulates a user releasing a key.
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $keySequence Either be a string("\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "w", "\119".
+     */
+    public function keyUp($locator, $keySequence)
+    {
+        $this->doCommand("keyUp", array($locator, $keySequence));
+    }
+
+
     /**
      * Simulates a user hovering a mouse over the specified element.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
      */
     public function mouseOver($locator)
     {
-        $this->doCommand('mouseOver', array($locator));
+        $this->doCommand("mouseOver", array($locator));
     }
-    // }}}
-    // {{{ mouseDown($locator)
+
+
+    /**
+     * Simulates a user moving the mouse pointer away from the specified element.
+     *
+     * @access public
+     * @param string $locator an element locator
+     */
+    public function mouseOut($locator)
+    {
+        $this->doCommand("mouseOut", array($locator));
+    }
+
+
     /**
      * Simulates a user pressing the mouse button (without releasing it yet) on
      * the specified element.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
      */
     public function mouseDown($locator)
     {
-        $this->doCommand('mouseDown', array($locator));
+        $this->doCommand("mouseDown", array($locator));
     }
-    // }}}
-    // {{{ type($locator, $value)
+
+
     /**
-     * Set the value of an input field, as though you typed it in.
+     * Simulates a user pressing the mouse button (without releasing it yet) on
+     * the specified element.
      *
-     * can also be used to set the value of combo boxes, check boxes, etc. In these cases,
+     * @access public
+     * @param string $locator an element locator
+     * @param string $coordString specifies the x,y position (i.e. - 10,20) of the mouse      event relative to the element returned by the locator.
+     */
+    public function mouseDownAt($locator, $coordString)
+    {
+        $this->doCommand("mouseDownAt", array($locator, $coordString));
+    }
+
+
+    /**
+     * Simulates a user pressing the mouse button (without releasing it yet) on
+     * the specified element.
+     *
+     * @access public
+     * @param string $locator an element locator
+     */
+    public function mouseUp($locator)
+    {
+        $this->doCommand("mouseUp", array($locator));
+    }
+
+
+    /**
+     * Simulates a user pressing the mouse button (without releasing it yet) on
+     * the specified element.
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $coordString specifies the x,y position (i.e. - 10,20) of the mouse      event relative to the element returned by the locator.
+     */
+    public function mouseUpAt($locator, $coordString)
+    {
+        $this->doCommand("mouseUpAt", array($locator, $coordString));
+    }
+
+
+    /**
+     * Simulates a user pressing the mouse button (without releasing it yet) on
+     * the specified element.
+     *
+     * @access public
+     * @param string $locator an element locator
+     */
+    public function mouseMove($locator)
+    {
+        $this->doCommand("mouseMove", array($locator));
+    }
+
+
+    /**
+     * Simulates a user pressing the mouse button (without releasing it yet) on
+     * the specified element.
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $coordString specifies the x,y position (i.e. - 10,20) of the mouse      event relative to the element returned by the locator.
+     */
+    public function mouseMoveAt($locator, $coordString)
+    {
+        $this->doCommand("mouseMoveAt", array($locator, $coordString));
+    }
+
+
+    /**
+     * Sets the value of an input field, as though you typed it in.
+     * 
+     * <p>
+     * Can also be used to set the value of combo boxes, check boxes, etc. In these cases,
      * value should be the value of the option selected, not the visible text.
+     * </p>
      *
+     * @access public
      * @param string $locator an element locator
      * @param string $value the value to type
-     * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function type($locator, $value)
     {
-        $this->doCommand('type', array($locator, $value));
+        $this->doCommand("type", array($locator, $value));
     }
-    // }}}
-    // {{{ check($locator)
+
+
+    /**
+     * Simulates keystroke events on the specified element, as though you typed the value key-by-key.
+     * 
+     * <p>
+     * This is a convenience method for calling keyDown, keyUp, keyPress for every character in the specified string;
+     * this is useful for dynamic UI widgets (like auto-completing combo boxes) that require explicit key events.
+     * </p><p>
+     * Unlike the simple "type" command, which forces the specified value into the page directly, this command
+     * may or may not have any visible effect, even in cases where typing keys would normally have a visible effect.
+     * For example, if you use "typeKeys" on a form element, you may or may not see the results of what you typed in
+     * the field.
+     * </p><p>
+     * In some cases, you may need to use the simple "type" command to set the value of the field and then the "typeKeys" command to
+     * send the keystroke events corresponding to what you just typed.
+     * </p>
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $value the value to type
+     */
+    public function typeKeys($locator, $value)
+    {
+        $this->doCommand("typeKeys", array($locator, $value));
+    }
+
+
+    /**
+     * Set execution speed (i.e., set the millisecond length of a delay which will follow each selenium operation).  By default, there is no such delay, i.e.,
+     * the delay is 0 milliseconds.
+     *
+     * @access public
+     * @param string $value the number of milliseconds to pause after operation
+     */
+    public function setSpeed($value)
+    {
+        $this->doCommand("setSpeed", array($value));
+    }
+
+
+    /**
+     * Get execution speed (i.e., get the millisecond length of the delay following each selenium operation).  By default, there is no such delay, i.e.,
+     * the delay is 0 milliseconds.
+     * 
+     * See also setSpeed.
+     *
+     * @access public
+     */
+    public function getSpeed()
+    {
+        $this->doCommand("getSpeed", array());
+    }
+
+
     /**
      * Check a toggle-button (checkbox/radio)
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
      */
     public function check($locator)
     {
-        $this->doCommand('check', array($locator));
+        $this->doCommand("check", array($locator));
     }
-    // }}}
-    // {{{ uncheck($locator)
+
+
     /**
      * Uncheck a toggle-button (checkbox/radio)
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
      */
     public function uncheck($locator)
     {
-        $this->doCommand('uncheck', array($locator));
+        $this->doCommand("uncheck", array($locator));
     }
-    // }}}
-    // {{{ select($selectLocator, $optionLocator)
+
+
     /**
      * Select an option from a drop-down using an option locator.
-     *
+     * 
+     * <p>
+     * 
      * Option locators provide different ways of specifying options of an HTML
      * Select element (e.g. for selecting a specific option, or for asserting
      * that the selected option satisfies a specification). There are several
      * forms of Select Option Locator.
-     *
-     *   <b>label</b>=<em>labelPattern</em>::
+     * 
+     * </p>
+     * <ul>
+     * 
+     * <li>
+     * <b>label</b>=<i>labelPattern</i>:
      * matches options based on their labels, i.e. the visible text. (This
      * is the default.)
-     *   label=regexp:^[Oo]ther
-     *
-     *   <b>value</b>=<em>valuePattern</em>::
+     * 
+     * <ul>
+     * 
+     * <li>
+     * label=regexp:^[Oo]ther
+     * </li>
+     * </ul>
+     * </li>
+     * <li>
+     * <b>value</b>=<i>valuePattern</i>:
      * matches options based on their values.
-     *    value=other
-     *
-     *   <b>id</b>=<em>id</em>::
+     * 
+     * <ul>
+     * 
+     * <li>
+     * value=other
+     * </li>
+     * </ul>
+     * </li>
+     * <li>
+     * <b>id</b>=<i>id</i>:
+     * 
      * matches options based on their ids.
-     *    id=option1
-     *
-     *   <b>index</b>=<em>index</em>::
+     * 
+     * <ul>
+     * 
+     * <li>
+     * id=option1
+     * </li>
+     * </ul>
+     * </li>
+     * <li>
+     * <b>index</b>=<i>index</i>:
      * matches an option based on its index (offset from zero).
-     *    index=2
-     *
+     * 
+     * <ul>
+     * 
+     * <li>
+     * index=2
+     * </li>
+     * </ul>
+     * </li>
+     * </ul><p>
+     * 
      * If no option locator prefix is provided, the default behaviour is to match on <b>label</b>.
+     * 
+     * </p>
      *
+     * @access public
      * @param string $selectLocator an element locator identifying a drop-down menu
      * @param string $optionLocator an option locator (a label by default)
-     * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function select($selectLocator, $optionLocator)
     {
-        $this->doCommand('select', array($selectLocator, $optionLocator));
+        $this->doCommand("select", array($selectLocator, $optionLocator));
     }
-    // }}}
-    // {{{ addselect($selectLocator, $optionLocator)
+
+
     /**
      * Add a selection to the set of selected options in a multi-select element using an option locator.
+     * 
+     * @see #doSelect for details of option locators
      *
+     * @access public
      * @param string $locator an element locator identifying a multi-select box
      * @param string $optionLocator an option locator (a label by default)
-     * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function addSelection($locator, $optionLocator)
     {
-        $this->doCommand('addSelection', array($locator, $optionLocator));
+        $this->doCommand("addSelection", array($locator, $optionLocator));
     }
-    // }}}
-    // {{{ removeSelect($selectLocator, $optionLocator)
+
+
     /**
-     * Remove a selection to the set of selected options in a multi-select element using an option locator.
+     * Remove a selection from the set of selected options in a multi-select element using an option locator.
+     * 
+     * @see #doSelect for details of option locators
      *
+     * @access public
      * @param string $locator an element locator identifying a multi-select box
      * @param string $optionLocator an option locator (a label by default)
-     * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function removeSelection($locator, $optionLocator)
     {
-        $this->doCommand('removeSelection', array($locator, $optionLocator));
+        $this->doCommand("removeSelection", array($locator, $optionLocator));
     }
-    // }}}
-    // {{{ submit($locator)
+
+
+    /**
+     * Unselects all of the selected options in a multi-select element.
+     *
+     * @access public
+     * @param string $locator an element locator identifying a multi-select box
+     */
+    public function removeAllSelections($locator)
+    {
+        $this->doCommand("removeAllSelections", array($locator));
+    }
+
+
     /**
      * Submit the specified form. This is particularly useful for forms without
      * submit buttons, e.g. single-input "Search" forms.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $formLocator an element locator for the form you want to submit
      */
-    public function submit($locator)
+    public function submit($formLocator)
     {
-        $this->doCommand('submit', array($locator));
+        $this->doCommand("submit", array($formLocator));
     }
-    // }}}
-    // {{{ open($url)
+
+
     /**
-     * Open the UrL in the test frame. This accepts both relative and absolute
+     * Opens an URL in the test frame. This accepts both relative and absolute
      * URLs.
-     *
-     * The "open" command waits for the page to load before proceeding.
+     * 
+     * The "open" command waits for the page to load before proceeding,
      * ie. the "AndWait" suffix is implicit.
-     *
-     * <em>Note</em>: The URL must be on the same domain as the runner HTML
+     * 
+     * <i>Note</i>: The URL must be on the same domain as the runner HTML
      * due to security restrictions in the browser (Same Origin Policy). If you
      * need to open an URL on another domain, use the Selenium Server to start a
      * new browser session on that domain.
      *
-     * @param string $url the URL to open; may be relative or absolute
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $url the URL to open; may be relative or absolute
      */
     public function open($url)
     {
-        $this->doCommand('open', array($url));
+        $this->doCommand("open", array($url));
     }
-    // }}}
-    // {{{ selectWindow($windowId)
+
+
+    /**
+     * Opens a popup window (if a window with that ID isn't already open).
+     * After opening the window, you'll need to select it using the selectWindow
+     * command.
+     * 
+     * <p>
+     * This command can also be a useful workaround for bug SEL-339.  In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example).
+     * In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using
+     * an empty (blank) url, like this: openWindow("", "myFunnyWindow").
+     * </p>
+     *
+     * @access public
+     * @param string $url the URL to open, which can be blank
+     * @param string $windowID the JavaScript window ID of the window to select
+     */
+    public function openWindow($url, $windowID)
+    {
+        $this->doCommand("openWindow", array($url, $windowID));
+    }
+
+
     /**
      * Selects a popup window; once a popup window has been selected, all
-     * commands go to that window. To select the main window again, use "null"
+     * commands go to that window. To select the main window again, use null
      * as the target.
+     * 
+     * <p>
+     * Selenium has several strategies for finding the window object referred to by the "windowID" parameter.
+     * </p><p>
+     * 1.) if windowID is null, then it is assumed the user is referring to the original window instantiated by the browser).
+     * </p><p>
+     * 2.) if the value of the "windowID" parameter is a JavaScript variable name in the current application window, then it is assumed
+     * that this variable contains the return value from a call to the JavaScript window.open() method.
+     * </p><p>
+     * 3.) Otherwise, selenium looks in a hash it maintains that maps string names to window objects.  Each of these string 
+     * names matches the second parameter "windowName" past to the JavaScript method  window.open(url, windowName, windowFeatures, replaceFlag)
+     * (which selenium intercepts).
+     * </p><p>
+     * If you're having trouble figuring out what is the name of a window that you want to manipulate, look at the selenium log messages
+     * which identify the names of windows created via window.open (and therefore intercepted by selenium).  You will see messages
+     * like the following for each window as it is opened:
+     * </p><p>
+     * <code>debug: window.open call intercepted; window ID (which you can use with selectWindow()) is "myNewWindow"</code>
+     * </p><p>
+     * In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example).
+     * (This is bug SEL-339.)  In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using
+     * an empty (blank) url, like this: openWindow("", "myFunnyWindow").
+     * </p>
      *
-     * @param string $windowId the JavaScript window ID of the window to select
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $windowID the JavaScript window ID of the window to select
      */
-    public function selectWindow($windowId)
+    public function selectWindow($windowID)
     {
-        $this->doCommand('selectWindow', array($windowId));
+        $this->doCommand("selectWindow", array($windowID));
     }
-    // }}}
-    // {{{ waitForPopUp($windowId, $timeout)
+
+
     /**
-     * Wait for a popup window to appear and load up.
+     * Selects a frame within the current window.  (You may invoke this command
+     * multiple times to select nested frames.)  To select the parent frame, use
+     * "relative=parent" as a locator; to select the top frame, use "relative=top".
+     * 
+     * <p>
+     * You may also use a DOM expression to identify the frame you want directly,
+     * like this: <code>dom=frames["main"].frames["subframe"]</code>
+     * </p>
      *
-     * @param string $windowId the JavaScript window ID of the window to select
-     * @param int $timeout a timeout in milliseconds, after which the action will return with an error
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator identifying a frame or iframe
      */
-    public function waitForPopUp($windowId, $timeout = null)
+    public function selectFrame($locator)
     {
-        if (empty($timeout)) {
-            $timeout = $this->timeout;
-        }
-        $this->doCommand('waitForPopUp', array($windowId, $timeout));
+        $this->doCommand("selectFrame", array($locator));
     }
-    // }}}
-    // {{{ chooseCancelOnNextConfirmation()
+
+
+    /**
+     * Return the contents of the log.
+     * 
+     * <p>
+     * This is a placeholder intended to make the code generator make this API
+     * available to clients.  The selenium server will intercept this call, however,
+     * and return its recordkeeping of log messages since the last call to this API.
+     * Thus this code in JavaScript will never be called.
+     * </p><p>
+     * The reason I opted for a servercentric solution is to be able to support
+     * multiple frames served from different domains, which would break a
+     * centralized JavaScript logging mechanism under some conditions.
+     * </p>
+     *
+     * @access public
+     * @return string all log messages seen since the last call to this API
+     */
+    public function getLogMessages()
+    {
+        return $this->getString("getLogMessages", array());
+    }
+
+
+    /**
+     * Determine whether current/locator identify the frame containing this running code.
+     * 
+     * <p>
+     * This is useful in proxy injection mode, where this code runs in every
+     * browser frame and window, and sometimes the selenium server needs to identify
+     * the "current" frame.  In this case, when the test calls selectFrame, this
+     * routine is called for each frame to figure out which one has been selected.
+     * The selected frame will return true, while all others will return false.
+     * </p>
+     *
+     * @access public
+     * @param string $currentFrameString starting frame
+     * @param string $target new frame (which might be relative to the current one)
+     * @return boolean true if the new frame is this code's window
+     */
+    public function getWhetherThisFrameMatchFrameExpression($currentFrameString, $target)
+    {
+        return $this->getBoolean("getWhetherThisFrameMatchFrameExpression", array($currentFrameString, $target));
+    }
+
+
+    /**
+     * Determine whether currentWindowString plus target identify the window containing this running code.
+     * 
+     * <p>
+     * This is useful in proxy injection mode, where this code runs in every
+     * browser frame and window, and sometimes the selenium server needs to identify
+     * the "current" window.  In this case, when the test calls selectWindow, this
+     * routine is called for each window to figure out which one has been selected.
+     * The selected window will return true, while all others will return false.
+     * </p>
+     *
+     * @access public
+     * @param string $currentWindowString starting window
+     * @param string $target new window (which might be relative to the current one, e.g., "_parent")
+     * @return boolean true if the new window is this code's window
+     */
+    public function getWhetherThisWindowMatchWindowExpression($currentWindowString, $target)
+    {
+        return $this->getBoolean("getWhetherThisWindowMatchWindowExpression", array($currentWindowString, $target));
+    }
+
+
+    /**
+     * Waits for a popup window to appear and load up.
+     *
+     * @access public
+     * @param string $windowID the JavaScript window ID of the window that will appear
+     * @param string $timeout a timeout in milliseconds, after which the action will return with an error
+     */
+    public function waitForPopUp($windowID, $timeout)
+    {
+        $this->doCommand("waitForPopUp", array($windowID, $timeout));
+    }
+
+
     /**
      * By default, Selenium's overridden window.confirm() function will
      * return true, as if the user had manually clicked OK.  After running
@@ -462,484 +1079,499 @@ class Testing_Selenium
      * the user had clicked Cancel.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function chooseCancelOnNextConfirmation()
     {
-        $this->doCommand('chooseCancelOnNextConfirmation');
+        $this->doCommand("chooseCancelOnNextConfirmation", array());
     }
-    // }}}
-    // {{{ answerOnNextPrompt($answer)
+
+
     /**
      * Instructs Selenium to return the specified answer string in response to
      * the next JavaScript prompt [window.prompt()].
      *
-     * @param string $answer the answer to give in response to the prompt pop-up
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $answer the answer to give in response to the prompt pop-up
      */
     public function answerOnNextPrompt($answer)
     {
-        $this->doCommand('answerOnNextPrompt', array($answer));
+        $this->doCommand("answerOnNextPrompt", array($answer));
     }
-    // }}}
-    // {{{ goBack()
+
+
     /**
-     * Simulates the user clicking the "back" button" on their browser.
+     * Simulates the user clicking the "back" button on their browser.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function goBack()
     {
-        $this->doCommand('goBack');
+        $this->doCommand("goBack", array());
     }
-    // }}}
-    // {{{ refresh()
+
+
     /**
-     * Simulates the user clicking the "Refresh" button" on their browser.
+     * Simulates the user clicking the "Refresh" button on their browser.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function refresh()
     {
-        $this->doCommand('refresh');
+        $this->doCommand("refresh", array());
     }
-    // }}}
-    // {{{ close()
+
+
     /**
-     * Simulates the user clicking the "close" button" in the titlebar of a popup
+     * Simulates the user clicking the "close" button in the titlebar of a popup
      * window or tab.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
      */
     public function close()
     {
-        $this->doCommand('close');
+        $this->doCommand("close", array());
     }
-    // }}}
-    // {{{ isAlertPresent()
+
+
     /**
-     * Has an alert occured?
+     * Has an alert occurred?
+     * 
+     * <p>
+     * 
+     * This function never throws an exception
+     * 
+     * </p>
      *
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @return boolean true if there is an alert
      */
     public function isAlertPresent()
     {
-        return $this->getBoolean('isAlertPresent');
+        return $this->getBoolean("isAlertPresent", array());
     }
-    // }}}
-    // {{{ isPromptPresent()
+
+
     /**
-     * Has a prompt occured?
+     * Has a prompt occurred?
+     * 
+     * <p>
+     * 
+     * This function never throws an exception
+     * 
+     * </p>
      *
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @return boolean true if there is a pending prompt
      */
     public function isPromptPresent()
     {
-        return $this->getBoolean('isPromptPresent');
+        return $this->getBoolean("isPromptPresent", array());
     }
-    // }}}
-    // {{{ isConfirmationPresent()
+
+
     /**
      * Has confirm() been called?
+     * 
+     * <p>
+     * 
+     * This function never throws an exception
+     * 
+     * </p>
      *
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @return boolean true if there is a pending confirmation
      */
     public function isConfirmationPresent()
     {
-        return $this->getBoolean('isConfirmationPresent');
+        return $this->getBoolean("isConfirmationPresent", array());
     }
-    // }}}
-    // {{{ getAlert()
+
 
     /**
      * Retrieves the message of a JavaScript alert generated during the previous action, or fail if there were no alerts.
+     * 
+     * <p>
      * Getting an alert has the same effect as manually clicking OK. If an
      * alert is generated but you do not get/verify it, the next Selenium action
      * will fail.
+     * </p><p>
      * NOTE: under Selenium, JavaScript alerts will NOT pop up a visible alert
      * dialog.
+     * </p><p>
      * NOTE: Selenium does NOT support JavaScript alerts that are generated in a
      * page's onload() event handler. In this case a visible dialog WILL be
      * generated and Selenium will hang until someone manually clicks OK.
+     * </p>
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string The message of the most recent JavaScript alert
      */
     public function getAlert()
     {
-        return $this->getString('getAlert');
+        return $this->getString("getAlert", array());
     }
-    // }}}
-    // {{{ getConfirmation()
+
+
     /**
      * Retrieves the message of a JavaScript confirmation dialog generated during
      * the previous action.
+     * 
+     * <p>
+     * 
      * By default, the confirm function will return true, having the same effect
      * as manually clicking OK. This can be changed by prior execution of the
      * chooseCancelOnNextConfirmation command. If an confirmation is generated
      * but you do not get/verify it, the next Selenium action will fail.
+     * 
+     * </p><p>
+     * 
      * NOTE: under Selenium, JavaScript confirmations will NOT pop up a visible
      * dialog.
+     * 
+     * </p><p>
+     * 
      * NOTE: Selenium does NOT support JavaScript confirmations that are
      * generated in a page's onload() event handler. In this case a visible
      * dialog WILL be generated and Selenium will hang until you manually click
      * OK.
+     * 
+     * </p>
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the message of the most recent JavaScript confirmation dialog
      */
     public function getConfirmation()
     {
-        return $this->getString('getConfirmation');
+        return $this->getString("getConfirmation", array());
     }
-    // }}}
-    // {{{ getPrompt()
+
+
     /**
      * Retrieves the message of a JavaScript question prompt dialog generated during
      * the previous action.
-     *
+     * 
+     * <p>
      * Successful handling of the prompt requires prior execution of the
      * answerOnNextPrompt command. If a prompt is generated but you
      * do not get/verify it, the next Selenium action will fail.
+     * </p><p>
      * NOTE: under Selenium, JavaScript prompts will NOT pop up a visible
      * dialog.
+     * </p><p>
      * NOTE: Selenium does NOT support JavaScript prompts that are generated in a
      * page's onload() event handler. In this case a visible dialog WILL be
-     * generated and Selenium will hang until someone manually clicks OK
+     * generated and Selenium will hang until someone manually clicks OK.
+     * </p>
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the message of the most recent JavaScript question prompt
      */
     public function getPrompt()
     {
-        return $this->getString('getPrompt');
+        return $this->getString("getPrompt", array());
     }
-    // }}}
-    // {{{ getLocation()
+
+
     /**
      * Gets the absolute URL of the current page.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the absolute URL of the current page
      */
     public function getLocation()
     {
-        return $this->getString('getLocation');
+        return $this->getString("getLocation", array());
     }
-    // }}}
-    // {{{ getTitle()
+
+
     /**
      * Gets the title of the current page.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the title of the current page
      */
     public function getTitle()
     {
-        return $this->getString('getTitle');
+        return $this->getString("getTitle", array());
     }
-    // }}}
-    // {{{ getBodyText()
+
+
     /**
      * Gets the entire text of the page.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the entire text of the page
      */
     public function getBodyText()
     {
-        return $this->getString('getBodyText');
+        return $this->getString("getBodyText", array());
     }
-    // }}}
-    // {{{ getValue($locator)
+
+
     /**
      * Gets the (whitespace-trimmed) value of an input field (or anything else with a value parameter).
      * For checkbox/radio elements, the value will be "on" or "off" depending on
      * whether the element is checked or not.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @return string the element value, or "on/off" for checkbox/radio elements
      */
     public function getValue($locator)
     {
-        return $this->getString('getValue', array($locator));
+        return $this->getString("getValue", array($locator));
     }
-    // }}}
-    // {{{ getText($locator)
+
+
     /**
      * Gets the text of an element. This works for any element that contains
      * text. This command uses either the textContent (Mozilla-like browsers) or
      * the innerText (IE-like browsers) of the element, which is the rendered
-     * text shown to the user
+     * text shown to the user.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @return string the text of the element
      */
     public function getText($locator)
     {
-        return $this->getString('getText', array($locator));
+        return $this->getString("getText", array($locator));
     }
-    // }}}
-    // {{{ getEval($locator)
+
+
+    /**
+     * Briefly changes the backgroundColor of the specified element yellow.  Useful for debugging.
+     *
+     * @access public
+     * @param string $locator an element locator
+     */
+    public function highlight($locator)
+    {
+        $this->doCommand("highlight", array($locator));
+    }
+
+
     /**
      * Gets the result of evaluating the specified JavaScript snippet.  The snippet may
      * have multiple lines, but only the result of the last line will be returned.
-     *
+     * 
+     * <p>
      * Note that, by default, the snippet will run in the context of the "selenium"
-     * object itself, so <tt>this</tt> will refer to the Selenium object, and <tt>window</tt> will
+     * object itself, so <code>this</code> will refer to the Selenium object, and <code>window</code> will
      * refer to the top-level runner test window, not the window of your application.
+     * </p><p>
      * If you need a reference to the window of your application, you can refer
-     * to <tt>this.browserbot.getCurrentWindow()</tt> and if you need to use
+     * to <code>this.browserbot.getCurrentWindow()</code> and if you need to use
      * a locator to refer to a single element in your application page, you can
-     * use <tt>this.page().findElement("foo")</tt> where "foo" is your locator.
+     * use <code>this.browserbot.findElement("foo")</code> where "foo" is your locator.
+     * </p>
      *
-     * @param string $locator an element locator
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $script the JavaScript snippet to run
+     * @return string the results of evaluating the snippet
      */
     public function getEval($script)
     {
-        return $this->getString('getEval', array($script));
+        return $this->getString("getEval", array($script));
     }
-    // }}}
-    // {{{ isChecked($locator)
+
+
     /**
-     * Gets whether a toggle-button (checkbox/radio) is checked. Fails if the specified element does't exist or isn't a toggle button.
+     * Gets whether a toggle-button (checkbox/radio) is checked.  Fails if the specified element doesn't exist or isn't a toggle-button.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator pointing to a checkbox or radio button
+     * @return boolean true if the checkbox is checked, false otherwise
      */
     public function isChecked($locator)
     {
-        return $this->getBoolean('isChecked', array($locator));
+        return $this->getBoolean("isChecked", array($locator));
     }
-    // }}}
-    // {{{ getTable($tableCellAddress)
+
+
     /**
      * Gets the text from a cell of a table. The cellAddress syntax
      * tableLocator.row.column, where row and column start at 0.
      *
-     * @param string $tableCellAddress a cell address, e.g. "foo.1.4"
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $tableCellAddress a cell address, e.g. "foo.1.4"
+     * @return string the text from the specified cell
      */
     public function getTable($tableCellAddress)
     {
-        return $this->getString('getTable', array($tableCellAddress));
+        return $this->getString("getTable", array($tableCellAddress));
     }
-    // }}}
-    // {{{ getSelectedLabels($selectLocator)
+
+
     /**
-     * Getsall option labels (visible text) for selected options in the specified select or multi-select element.
+     * Gets all option labels (visible text) for selected options in the specified select or multi-select element.
      *
-     * @param string $optionLocator an option locator (a label by default)
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return array an array of all selected option labels in the specified select drop-down
      */
     public function getSelectedLabels($selectLocator)
     {
-        return $this->getStringArray('getSelectedLabels', array($selectLocator));
+        return $this->getStringArray("getSelectedLabels", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedLabel($selectLocator)
+
+
     /**
-     * Gets all option labels (visible text) for selected options in the specified selector multi-select element.
+     * Gets option label (visible text) for selected option in the specified select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return string the selected option label in the specified select drop-down
      */
     public function getSelectedLabel($selectLocator)
     {
-        return $this->getString('getSelectedLabel', array($selectLocator));
+        return $this->getString("getSelectedLabel", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedValues($selectLocator)
+
+
     /**
      * Gets all option values (value attributes) for selected options in the specified select or multi-select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return array an array of all selected option values in the specified select drop-down
      */
     public function getSelectedValues($selectLocator)
     {
-        return $this->getStringArray('getSelectedValues', array($selectLocator));
+        return $this->getStringArray("getSelectedValues", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedValue($selectLocator)
+
+
     /**
      * Gets option value (value attribute) for selected option in the specified select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return string the selected option value in the specified select drop-down
      */
     public function getSelectedValue($selectLocator)
     {
-        return $this->getString('getSelectedValue', array($selectLocator));
+        return $this->getString("getSelectedValue", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedIndexes($selectLocator)
+
+
     /**
      * Gets all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return array an array of all selected option indexes in the specified select drop-down
      */
     public function getSelectedIndexes($selectLocator)
     {
-        return $this->getStringArray('getSelectedIndexes', array($selectLocator));
+        return $this->getStringArray("getSelectedIndexes", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedIndex($selectLocator)
+
+
     /**
      * Gets option index (option number, starting at 0) for selected option in the specified select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return string the selected option index in the specified select drop-down
      */
     public function getSelectedIndex($selectLocator)
     {
-        return $this->getString('getSelectedIndex', array($selectLocator));
+        return $this->getString("getSelectedIndex", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedIds($selectLocator)
+
+
     /**
      * Gets all option element IDs for selected options in the specified select or multi-select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return array an array of all selected option IDs in the specified select drop-down
      */
     public function getSelectedIds($selectLocator)
     {
-        return $this->getStringArray('getSelectedIds', array($selectLocator));
+        return $this->getStringArray("getSelectedIds", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectedId($selectLocator)
+
+
     /**
      * Gets option element ID for selected option in the specified select element.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return string the selected option ID in the specified select drop-down
      */
     public function getSelectedId($selectLocator)
     {
-        return $this->getString('getSelectedId', array($selectLocator));
+        return $this->getString("getSelectedId", array($selectLocator));
     }
-    // }}}
-    // {{{ getSomethingSelected($selectLocator)
+
+
     /**
      * Determines whether some option in a drop-down menu is selected.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return boolean true if some option has been selected, false otherwise
      */
     public function isSomethingSelected($selectLocator)
     {
-        return $this->getBoolean('isSomethingSelected', array($selectLocator));
+        return $this->getBoolean("isSomethingSelected", array($selectLocator));
     }
-    // }}}
-    // {{{ getSelectOptions($selectLocator)
+
+
     /**
      * Gets all option labels in the specified select drop-down.
      *
-     * @param string $selectLocator an element locator identifying a drop-down menu
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @param string $selectLocator an element locator identifying a drop-down menu
+     * @return array an array of all option labels in the specified select drop-down
      */
     public function getSelectOptions($selectLocator)
     {
-        return $this->getStringArray('getSelectOptions', array($selectLocator));
+        return $this->getStringArray("getSelectOptions", array($selectLocator));
     }
-    // }}}
-    // {{{ getAttribute($attributeLocator)
+
+
     /**
-     * Gets the value of an element attribute
+     * Gets the value of an element attribute.
      *
-     * @param string $attributeLocator  an element locator followd by an
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $attributeLocator an element locator followed by an
+     * @return string the value of the specified attribute
      */
     public function getAttribute($attributeLocator)
     {
-        return $this->getString('getAttribute', array($attributeLocator));
+        return $this->getString("getAttribute", array($attributeLocator));
     }
-    // }}}
-    // {{{ isTextPresent($pattern)
+
+
     /**
      * Verifies that the specified text pattern appears somewhere on the rendered page shown to the user.
      *
-     * @param string $pattern a pattern to match with the text of the page
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $pattern a pattern to match with the text of the page
+     * @return boolean true if the pattern matches the text, false otherwise
      */
     public function isTextPresent($pattern)
     {
-        return $this->getBoolean('isTextPresent', array($pattern));
+        return $this->getBoolean("isTextPresent", array($pattern));
     }
-    // }}}
-    // {{{ isElementPresent($locator)
+
+
     /**
      * Verifies that the specified element is somewhere on the page.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @return boolean true if the element is present, false otherwise
      */
     public function isElementPresent($locator)
     {
-        return $this->getBoolean('isElementPresent', array($locator));
+        return $this->getBoolean("isElementPresent", array($locator));
     }
-    // }}}
-    // {{{ isVisible($locator)
+
+
     /**
      * Determines if the specified element is visible. An
      * element can be rendered invisible by setting the CSS "visibility"
@@ -947,236 +1579,489 @@ class Testing_Selenium
      * element itself or one if its ancestors.  This method will fail if
      * the element is not present.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @return boolean true if the specified element is visible, false otherwise
      */
     public function isVisible($locator)
     {
-        return $this->getBoolean('isVisible', array($locator));
+        return $this->getBoolean("isVisible", array($locator));
     }
-    // }}}
-    // {{{ isEditable($locator)
+
+
     /**
      * Determines whether the specified input element is editable, ie hasn't been disabled.
      * This method will fail if the specified element isn't an input element.
      *
-     * @param string $locator an element locator
      * @access public
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator
+     * @return boolean true if the input element is editable, false otherwise
      */
     public function isEditable($locator)
     {
-        return $this->getBoolean('isEditable', array($locator));
+        return $this->getBoolean("isEditable", array($locator));
     }
-    // }}}
-    // {{{ getAllButtons()
+
+
     /**
      * Returns the IDs of all buttons on the page.
-     * If a given button has no ID, it will appear as "" in the array.
+     * 
+     * <p>
+     * If a given button has no ID, it will appear as "" in this array.
+     * </p>
      *
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @return array the IDs of all buttons on the page
      */
     public function getAllButtons()
     {
-        return $this->getStringArray('getAllButtons');
+        return $this->getStringArray("getAllButtons", array());
     }
-    // }}}
-    // {{{ getAllLinks()
+
+
     /**
      * Returns the IDs of all links on the page.
-     * If a given link has no ID, it will appear as "" in the array.
+     * 
+     * <p>
+     * If a given link has no ID, it will appear as "" in this array.
+     * </p>
      *
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @return array the IDs of all links on the page
      */
     public function getAllLinks()
     {
-        return $this->getStringArray('getAllLinks');
+        return $this->getStringArray("getAllLinks", array());
     }
-    // }}}
-    // {{{ getAllFields()
+
+
     /**
-     * Returns the IDs of all nput fields on the page.
-     * If a given field has no ID, it will appear as "" in the array.
+     * Returns the IDs of all input fields on the page.
+     * 
+     * <p>
+     * If a given field has no ID, it will appear as "" in this array.
+     * </p>
      *
      * @access public
-     * @return array on success
-     * @throws Testing_Selenium_Exception
+     * @return array the IDs of all field on the page
      */
     public function getAllFields()
     {
-        return $this->getStringArray('getAllFields');
+        return $this->getStringArray("getAllFields", array());
     }
-    // }}}
-    // {{{ getHtmlSource()
+
+
+    /**
+     * Returns every instance of some attribute from all known windows.
+     *
+     * @access public
+     * @param string $attributeName name of an attribute on the windows
+     * @return array the set of values of this attribute from all known windows.
+     */
+    public function getAttributeFromAllWindows($attributeName)
+    {
+        return $this->getStringArray("getAttributeFromAllWindows", array($attributeName));
+    }
+
+
+    /**
+     * deprecated - use dragAndDrop instead
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $movementsString offset in pixels from the current location to which the element should be moved, e.g., "+70,-300"
+     */
+    public function dragdrop($locator, $movementsString)
+    {
+        $this->doCommand("dragdrop", array($locator, $movementsString));
+    }
+
+
+    /**
+     * Configure the number of pixels between "mousemove" events during dragAndDrop commands (default=10).
+     * <p>
+     * Setting this value to 0 means that we'll send a "mousemove" event to every single pixel
+     * in between the start location and the end location; that can be very slow, and may
+     * cause some browsers to force the JavaScript to timeout.
+     * </p><p>
+     * If the mouse speed is greater than the distance between the two dragged objects, we'll
+     * just send one "mousemove" at the start location and then one final one at the end location.
+     * </p>
+     *
+     * @access public
+     * @param string $pixels the number of pixels between "mousemove" events
+     */
+    public function setMouseSpeed($pixels)
+    {
+        $this->doCommand("setMouseSpeed", array($pixels));
+    }
+
+
+    /**
+     * Returns the number of pixels between "mousemove" events during dragAndDrop commands (default=10).
+     *
+     * @access public
+     * @return number the number of pixels between "mousemove" events during dragAndDrop commands (default=10)
+     */
+    public function getMouseSpeed()
+    {
+        return $this->getNumber("getMouseSpeed", array());
+    }
+
+
+    /**
+     * Drags an element a certain distance and then drops it
+     *
+     * @access public
+     * @param string $locator an element locator
+     * @param string $movementsString offset in pixels from the current location to which the element should be moved, e.g., "+70,-300"
+     */
+    public function dragAndDrop($locator, $movementsString)
+    {
+        $this->doCommand("dragAndDrop", array($locator, $movementsString));
+    }
+
+
+    /**
+     * Drags an element and drops it on another element
+     *
+     * @access public
+     * @param string $locatorOfObjectToBeDragged an element to be dragged
+     * @param string $locatorOfDragDestinationObject an element whose location (i.e., whose center-most pixel) will be the point where locatorOfObjectToBeDragged  is dropped
+     */
+    public function dragAndDropToObject($locatorOfObjectToBeDragged, $locatorOfDragDestinationObject)
+    {
+        $this->doCommand("dragAndDropToObject", array($locatorOfObjectToBeDragged, $locatorOfDragDestinationObject));
+    }
+
+
+    /**
+     * Gives focus to a window
+     *
+     * @access public
+     * @param string $windowName name of the window to be given focus
+     */
+    public function windowFocus($windowName)
+    {
+        $this->doCommand("windowFocus", array($windowName));
+    }
+
+
+    /**
+     * Resize window to take up the entire screen
+     *
+     * @access public
+     * @param string $windowName name of the window to be enlarged
+     */
+    public function windowMaximize($windowName)
+    {
+        $this->doCommand("windowMaximize", array($windowName));
+    }
+
+
+    /**
+     * Returns the IDs of all windows that the browser knows about.
+     *
+     * @access public
+     * @return array the IDs of all windows that the browser knows about.
+     */
+    public function getAllWindowIds()
+    {
+        return $this->getStringArray("getAllWindowIds", array());
+    }
+
+
+    /**
+     * Returns the names of all windows that the browser knows about.
+     *
+     * @access public
+     * @return array the names of all windows that the browser knows about.
+     */
+    public function getAllWindowNames()
+    {
+        return $this->getStringArray("getAllWindowNames", array());
+    }
+
+
+    /**
+     * Returns the titles of all windows that the browser knows about.
+     *
+     * @access public
+     * @return array the titles of all windows that the browser knows about.
+     */
+    public function getAllWindowTitles()
+    {
+        return $this->getStringArray("getAllWindowTitles", array());
+    }
+
+
     /**
      * Returns the entire HTML source between the opening and
      * closing "html" tags.
      *
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @return string the entire HTML source
      */
     public function getHtmlSource()
     {
-        // XXX Thanks to Asad!
-        // The initial release of the this method name was getAllSource,
-        return $this->getString('getHtmlSource');
+        return $this->getString("getHtmlSource", array());
     }
-    // }}}
-    // {{{ setCursorPosition($locator, $position)
+
+
     /**
      * Moves the text cursor to the specified position in the given input element or textarea.
-     * This method will fail if the specified element isn't an input element or textarea
+     * This method will fail if the specified element isn't an input element or textarea.
      *
-     * @param string $locator an element locator pointing to an input element or textarea
-     * @param int $position the numerical position of the cursor in the field; position should be 0 to move the position to the beginning of the field. You can also set the cursor to -1 to move it to the endo of the field.
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator pointing to an input element or textarea
+     * @param string $position the numerical position of the cursor in the field; position should be 0 to move the position to the beginning of the field.  You can also set the cursor to -1 to move it to the end of the field.
      */
     public function setCursorPosition($locator, $position)
     {
-        $this->doCommand('setCursorPosition', array($locator, $position));
+        $this->doCommand("setCursorPosition", array($locator, $position));
     }
-    // }}}
-    // {{{ getCursorPosition($locator)
+
+
+    /**
+     * Get the relative index of an element to its parent (starting from 0). The comment node and empty text node
+     * will be ignored.
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element
+     * @return number of relative index of the element to its parent (starting from 0)
+     */
+    public function getElementIndex($locator)
+    {
+        return $this->getNumber("getElementIndex", array($locator));
+    }
+
+
+    /**
+     * Check if these two elements have same parent and are ordered. Two same elements will
+     * not be considered ordered.
+     *
+     * @access public
+     * @param string $locator1 an element locator pointing to the first element
+     * @param string $locator2 an element locator pointing to the second element
+     * @return boolean true if two elements are ordered and have same parent, false otherwise
+     */
+    public function isOrdered($locator1, $locator2)
+    {
+        return $this->getBoolean("isOrdered", array($locator1, $locator2));
+    }
+
+
+    /**
+     * Retrieves the horizontal position of an element
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element OR an element itself
+     * @return number of pixels from the edge of the frame.
+     */
+    public function getElementPositionLeft($locator)
+    {
+        return $this->getNumber("getElementPositionLeft", array($locator));
+    }
+
+
+    /**
+     * Retrieves the vertical position of an element
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element OR an element itself
+     * @return number of pixels from the edge of the frame.
+     */
+    public function getElementPositionTop($locator)
+    {
+        return $this->getNumber("getElementPositionTop", array($locator));
+    }
+
+
+    /**
+     * Retrieves the width of an element
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element
+     * @return number width of an element in pixels
+     */
+    public function getElementWidth($locator)
+    {
+        return $this->getNumber("getElementWidth", array($locator));
+    }
+
+
+    /**
+     * Retrieves the height of an element
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element
+     * @return number height of an element in pixels
+     */
+    public function getElementHeight($locator)
+    {
+        return $this->getNumber("getElementHeight", array($locator));
+    }
+
+
     /**
      * Retrieves the text cursor position in the given input element or textarea; beware, this may not work perfectly on all browsers.
+     * 
+     * <p>
      * Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to
      * return the position of the last location of the cursor, even though the cursor is now gone from the page.  This is filed as SEL-243.
+     * </p>
      * This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
      *
-     * @param string $locator an element locator poiting to an input element or textarea
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $locator an element locator pointing to an input element or textarea
+     * @return number the numerical position of the cursor in the field
      */
     public function getCursorPosition($locator)
     {
-        return $this->getString('getCursorPosition', array($locator));
+        return $this->getNumber("getCursorPosition", array($locator));
     }
-    // }}}
-    // {{{ setContext($context, $logLevelThreashould)
+
+
     /**
      * Writes a message to the status bar and adds a note to the browser-side
      * log.
-     *
+     * 
+     * <p>
      * If logLevelThreshold is specified, set the threshold for logging
      * to that level (debug, info, warn, error).
-     * (Note that the browser-side logs will <em>not</em> be sent back to the
+     * </p><p>
+     * (Note that the browser-side logs will <i>not</i> be sent back to the
      * server, and are invisible to the Client Driver.)
+     * </p>
      *
-     * @param string $context the message to be sent to the browser
-     * @param string $logLevelThreashould one of "debug", "info", "warn" , "error", sets the thrshould for browser-side logging
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $context the message to be sent to the browser
+     * @param string $logLevelThreshold one of "debug", "info", "warn", "error", sets the threshold for browser-side logging
      */
-    public function setContext($context, $logLevelThreashould)
+    public function setContext($context, $logLevelThreshold)
     {
-        $this->doCommand('setContext', array($context, $logLevelThreshould));
+        $this->doCommand("setContext", array($context, $logLevelThreshold));
     }
-    // }}}
-    // {{{ getExpression($expression)
+
+
     /**
      * Returns the specified expression.
-     *
+     * 
+     * <p>
      * This is useful because of JavaScript preprocessing.
      * It is used to generate commands like assertExpression and waitForExpression.
+     * </p>
      *
-     * @param string $expression the value to return
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $expression the value to return
+     * @return string the value passed in
      */
     public function getExpression($expression)
     {
-        return $this->getString('getExpression', array($expression));
+        return $this->getString("getExpression", array($expression));
     }
-    // }}}
-    // {{{ waitForCondition($script, $timeout = null)
+
+
     /**
      * Runs the specified JavaScript snippet repeatedly until it evaluates to "true".
      * The snippet may have multiple lines, but only the result of the last line
      * will be considered.
+     * 
+     * <p>
      * Note that, by default, the snippet will be run in the runner's test window, not in the window
      * of your application.  To get the window of your application, you can use
-     * the JavaScript snippet <tt>selenium.browserbot.getCurrentWindow()</tt>, and then
+     * the JavaScript snippet <code>selenium.browserbot.getCurrentWindow()</code>, and then
      * run your JavaScript in there
+     * </p>
      *
-     * @param string $script the JavaScript snippet to run
-     * @param int $timeout in milliseconds, after which this command will return with an error
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $script the JavaScript snippet to run
+     * @param string $timeout a timeout in milliseconds, after which this command will return with an error
      */
-    public function waitForCondition($script, $timeout = null)
+    public function waitForCondition($script, $timeout)
     {
-        if (empty($timeout)) {
-            $timeout = $this->timeout;
-        }
-        $this->doCommand('waitForCondition', array($script, $timeout));
+        $this->doCommand("waitForCondition", array($script, $timeout));
     }
-    // }}}
-    // {{{ setTimeout($timeout)
+
+
     /**
      * Specifies the amount of time that Selenium will wait for actions to complete.
+     * 
+     * <p>
      * Actions that require waiting include "open" and the "waitFor*" actions.
+     * </p>
      * The default timeout is 30 seconds.
      *
-     * @param int $timeout in milliseconds, after which the action will return with an error
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $timeout a timeout in milliseconds, after which the action will return with an error
      */
     public function setTimeout($timeout)
     {
-        $this->timeout = $timeout;
-        $this->doCommand('setTimeout', array($timeout));
+        $this->doCommand("setTimeout", array($timeout));
     }
-    // }}}
-    // {{{ waitForPageToLoad($timeout)
+
+
     /**
      * Waits for a new page to load.
+     * 
+     * <p>
      * You can use this command instead of the "AndWait" suffixes, "clickAndWait", "selectAndWait", "typeAndWait" etc.
      * (which are only available in the JS API).
+     * </p><p>
      * Selenium constantly keeps track of new pages loading, and sets a "newPageLoaded"
      * flag when it first notices a page load.  Running any other Selenium command after
      * turns the flag to false.  Hence, if you want to wait for a page to load, you must
      * wait immediately after a Selenium command that caused a page-load.
+     * </p>
      *
-     * @param string $timeout a timeout in milliseconds, after which this command will return with an error
      * @access public
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @param string $timeout a timeout in milliseconds, after which this command will return with an error
      */
-    public function waitForPageToLoad($timeout = null)
+    public function waitForPageToLoad($timeout)
     {
-        if (empty($timeout)) {
-            $timeout = $this->timeout;
-        }
-        $this->doCommand('waitForPageToLoad', array($timeout));
+        $this->doCommand("waitForPageToLoad", array($timeout));
     }
-    // }}}
-    // }}}
-    // {{{  private methods
-    // {{{ doCommand
+
+
     /**
-     * Send the specified Selenese command to the browser to be performed
+     * Return all cookies of the current page under test.
      *
-     * @param string $verb
-     * @param array $args
-     * @access private
-     * @return string on success
-     * @throws Testing_Selenium_Exception
+     * @access public
+     * @return string all cookies of the current page under test
      */
+    public function getCookie()
+    {
+        return $this->getString("getCookie", array());
+    }
+
+
+    /**
+     * Create a new cookie whose path and domain are same with those of current page
+     * under test, unless you specified a path for this cookie explicitly.
+     *
+     * @access public
+     * @param string $nameValuePair name and value of the cookie in a format "name=value"
+     * @param string $optionsString options for the cookie. Currently supported options include 'path' and 'max_age'.      the optionsString's format is "path=/path/, max_age=60". The order of options are irrelevant, the unit      of the value of 'max_age' is second.
+     */
+    public function createCookie($nameValuePair, $optionsString)
+    {
+        $this->doCommand("createCookie", array($nameValuePair, $optionsString));
+    }
+
+
+    /**
+     * Delete a named cookie with specified path.
+     *
+     * @access public
+     * @param string $name the name of the cookie to be deleted
+     * @param string $path the path property of the cookie to be deleted
+     */
+    public function deleteCookie($name, $path)
+    {
+        $this->doCommand("deleteCookie", array($name, $path));
+    }
+
+
     private function doCommand($verb, $args = array())
     {
         $url = sprintf('http://%s:%s/selenium-server/driver/?cmd=%s', $this->host, $this->port, urlencode($verb));
@@ -1190,8 +2075,6 @@ class Testing_Selenium
         }
         if ($this->driver == 'curl') {
             $response = $this->useCurl($verb, $args, $url);
-        } elseif ($this->driver == 'pear') {
-            $response = $this->useHTTP_Request($verb, $args, $url);
         } else {
             $response = $this->useNative($verb, $args, $url);
         }
@@ -1201,41 +2084,7 @@ class Testing_Selenium
         }
         return $response;
     }
-    // }}}
-    // {{{ use PEAR HTTP_Request
-    /**
-     * useHTTP_Request
-     *
-     * @param string $verb
-     * @param string $args
-     * @param string $url
-     * @access private
-     * @return string
-     * @throws Testing_Selenium_Exception
-     */
-    private function useHTTP_Request($verb, $args, $url)
-    {
-        require_once 'HTTP/Request.php';
-        $request = new HTTP_Request($url);
-        $request->_sock->blocking = false;
-        $result = $request->sendRequest();
-        if (PEAR::isError($result)) {
-            throw Testing_Selenium_Exception('Can not connect to Selenium RC Server: '. $result->getMessage(), $request->getResponseCode());
-        }
-        return $request->getResponseBody();
-    }
-    // }}}
-    // {{{ use PHP native functions
-    /**
-     * useNative
-     *
-     * @param string $verb
-     * @param string $args
-     * @param string $url
-     * @access private
-     * @return string
-     * @throws Testing_Selenium_Exception
-     */
+
     private function useNative($verb, $args, $url)
     {
         if (!$handle = fopen($url, 'r')) {
@@ -1248,22 +2097,11 @@ class Testing_Selenium
 
         return $response;
     }
-    // }}}
-    // {{{ use PHP curl extension functions
-    /**
-     * useCurl
-     *
-     * @param string $verb
-     * @param string $args
-     * @param string $url
-     * @access private
-     * @return string
-     * @throws Testing_Selenium_Exception
-     */
+
     private function useCurl($verb, $args, $url)
     {
         if (!function_exists('curl_init')) {
-            throw new Testing_Selenium_Exception('cannot use curl exntensions. chosse "pear" or "native"');
+            throw new Testing_Selenium_Exception('cannot use curl exntensions. chosse or "native"');
         }
 
         if (!$ch = curl_init($url)) {
@@ -1278,17 +2116,7 @@ class Testing_Selenium
         curl_close($ch);
         return $result;
     }
-    // }}}
-    // {{{ getString
-    /**
-     * Get the string result of the Selenese Command
-     *
-     * @param string $verb
-     * @param array $arg
-     * @access protected
-     * @return string on success
-     * @throws Testing_Selenium_Exception
-     */
+
     private function getString($verb, $args = array())
     {
         try {
@@ -1298,17 +2126,7 @@ class Testing_Selenium
         }
         return substr($result, 3);
     }
-    // }}}
-    // {{{ getStringArray
-    /**
-     * Get the array result of the Selenese Command
-     *
-     * @param string $verb
-     * @param array $args
-     * @access protected
-     * @return array on success
-     * @throws Testing_Selenium_Exception
-     */
+
     private function getStringArray($verb, $args = array())
     {
         $csv = $this->getString($verb, $args);
@@ -1335,17 +2153,7 @@ class Testing_Selenium
         array_push($tokens, $token);
         return $tokens;
     }
-    // }}}
-    // {{{ getBoolean
-    /**
-     * Get the boolean result of the Selenese Command
-     *
-     * @param string $verb
-     * @param array $args
-     * @access private
-     * @return boolean on success
-     * @throws Testing_Selenium_Exception
-     */
+
     private function getBoolean($verb, $args = array())
     {
         $result = $this->getString($verb, $args);
@@ -1358,7 +2166,6 @@ class Testing_Selenium
             throw new Testing_Selenium_Exception('result is neither "true" or "false": ' . $result);
         }
     }
-    // }}}
-    // }}}
 }
 ?>
+  
