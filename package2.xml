@@ -36,8 +36,8 @@ the Selenium Server.  (The Selenium Server is a Java application.)</description>
   <email>bjoern@thinkphphq.de</email>
   <active>yes</active>
  </developer>
- <date>2006-12-09</date>
- <time>00:54:35</time>
+ <date>2006-12-10</date>
+ <time>06:27:16</time>
  <version>
   <release>0.3.0</release>
   <api>0.3.0</api>
@@ -59,181 +59,53 @@ the Selenium Server.  (The Selenium Server is a Java application.)</description>
   <dir baseinstalldir="Testing" name="/">
    <dir name="examples">
     <file name="example.php" role="doc">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
    </dir> <!-- /examples -->
    <dir name="Selenium">
     <file name="Exception.php" role="php">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
    </dir> <!-- /Selenium -->
    <dir name="tests">
-    <dir name="events">
-     <file name="readme.txt" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestButtonEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestCheckboxEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestFireEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestKeyEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestLinkEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestMouseEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestRadioEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestSelectEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="TestTextEvents.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-    </dir> <!-- /tests/events -->
     <dir name="html">
-     <file name="banner.gif" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <file name="bug8893.html" role="test">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
      </file>
      <file name="bug9119.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
      </file>
      <file name="bug9189.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_async_event.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_check_uncheck.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_click_javascript_page.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_click_page1.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_click_page2.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_confirm.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_dummy_page.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_editable.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_focus_on_blur.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_form_events.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_framed_page.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_i18n.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_just_text.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_locators.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_modal_dialog.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_modal_dialog_dialog.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_multiselect.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_open.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_page.slow.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_prompt.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_reload_onchange_page.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_select.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_select_window.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_select_window_popup.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_store_value.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_submit.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_text_content.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_type_page1.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_type_page2.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_verifications.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_verify_alert.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-     </file>
-     <file name="test_visibility.html" role="test">
-      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
      </file>
     </dir> <!-- /tests/html -->
     <file name="AllTests.php" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
     <file name="BugTest.php" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
     <file name="GoogleTest.php" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
     <file name="SeleniumTest.php" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
    </dir> <!-- /tests -->
    <file name="ChangeLog" role="doc">
-    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="README" role="doc">
-    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="selenium-server.jar" role="data">
-    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="Selenium.php" role="php">
-    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="TODO" role="doc">
-    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
   </dir> <!-- / -->
  </contents>
@@ -372,7 +244,7 @@ the Selenium Server.  (The Selenium Server is a Java application.)</description>
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2006-12-09</date>
+   <date>2006-12-10</date>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>
   - Adjusted for compatibility with Selenium Remote Control 0.9.0.

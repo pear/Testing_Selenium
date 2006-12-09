@@ -35,8 +35,8 @@ $packagexml->setChannel('pear.php.net');
 $packagexml->setPackage('Testing_Selenium');
 $packagexml->setReleaseVersion($releaseVersion);
 $packagexml->setAPIVersion($apiVersion);
-$packagexml->setReleaseStability('alpha');
-$packagexml->setAPIStability('alpha');
+$packagexml->setReleaseStability('beta');
+$packagexml->setAPIStability('beta');
 $packagexml->setSummary('PHP Client for Selenium RC');
 $packagexml->setDescription('PHP Client for the Selenium Remote Control test tool
 
@@ -63,7 +63,7 @@ $packagexml->addExtensionDep('optional', 'curl');
 $packagexml->addMaintainer('lead', 'shin', 'Shin Ohno', 'ganchiku@gmail.com');
 $packagexml->addMaintainer('developer', 'bjoern', 'Bjoern Schotte', 'bjoern@thinkphphq.de');
 $packagexml->setLicense('PHP License', 'http://www.php.net/license');
-$packagexml->addGlobalReplacement('package-info', '@PEAR-VER@', 'version');
+$packagexml->addGlobalReplacement('package-info', '@package_version@', 'version');
 $packagexml->generateContents();
 $pkg = &$packagexml->exportCompatiblePackageFile1();
 if (isset($_GET['make']) || (isset($_SERVER['argv']) && @$_SERVER['argv'][1] == 'make')) {

@@ -38,7 +38,7 @@ the Selenium Server.  (The Selenium Server is a Java application.)
   </maintainers>
  <release>
   <version>0.3.0</version>
-  <date>2006-12-09</date>
+  <date>2006-12-10</date>
   <license>PHP License</license>
   <state>alpha</state>
   <notes>- Adjusted for compatibility with Selenium Remote Control 0.9.0.
@@ -56,181 +56,53 @@ the Selenium Server.  (The Selenium Server is a Java application.)
    <dir name="/" baseinstalldir="Testing">
     <dir name="examples">
      <file role="doc" name="example.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
     </dir> <!-- /examples -->
     <dir name="Selenium">
      <file role="php" name="Exception.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
     </dir> <!-- /Selenium -->
     <dir name="tests">
-     <dir name="events">
-      <file role="test" name="readme.txt">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestButtonEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestCheckboxEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestFireEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestKeyEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestLinkEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestMouseEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestRadioEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestSelectEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="TestTextEvents.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-     </dir> <!-- /tests/events -->
      <dir name="html">
-      <file role="test" name="banner.gif">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <file role="test" name="bug8893.html">
+       <replace from="@package_version@" to="version" type="package-info"/>
       </file>
       <file role="test" name="bug9119.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
+       <replace from="@package_version@" to="version" type="package-info"/>
       </file>
       <file role="test" name="bug9189.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_async_event.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_check_uncheck.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_click_javascript_page.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_click_page1.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_click_page2.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_confirm.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_dummy_page.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_editable.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_focus_on_blur.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_form_events.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_framed_page.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_i18n.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_just_text.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_locators.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_modal_dialog.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_modal_dialog_dialog.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_multiselect.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_open.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_page.slow.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_prompt.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_reload_onchange_page.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_select.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_select_window.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_select_window_popup.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_store_value.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_submit.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_text_content.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_type_page1.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_type_page2.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_verifications.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_verify_alert.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
-      </file>
-      <file role="test" name="test_visibility.html">
-       <replace from="@PEAR-VER@" to="version" type="package-info"/>
+       <replace from="@package_version@" to="version" type="package-info"/>
       </file>
      </dir> <!-- /tests/html -->
      <file role="test" name="AllTests.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
      <file role="test" name="BugTest.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
      <file role="test" name="GoogleTest.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
      <file role="test" name="SeleniumTest.php">
-      <replace from="@PEAR-VER@" to="version" type="package-info"/>
+      <replace from="@package_version@" to="version" type="package-info"/>
      </file>
     </dir> <!-- /tests -->
     <file role="doc" name="ChangeLog">
-     <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     <replace from="@package_version@" to="version" type="package-info"/>
     </file>
     <file role="doc" name="README">
-     <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     <replace from="@package_version@" to="version" type="package-info"/>
     </file>
     <file role="data" name="selenium-server.jar">
-     <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     <replace from="@package_version@" to="version" type="package-info"/>
     </file>
     <file role="php" name="Selenium.php">
-     <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     <replace from="@package_version@" to="version" type="package-info"/>
     </file>
     <file role="doc" name="TODO">
-     <replace from="@PEAR-VER@" to="version" type="package-info"/>
+     <replace from="@package_version@" to="version" type="package-info"/>
     </file>
    </dir> <!-- / -->
   </filelist>
@@ -307,7 +179,7 @@ the Selenium Server.  (The Selenium Server is a Java application.)
    </release>
    <release>
     <version>0.3.0</version>
-    <date>2006-12-09</date>
+    <date>2006-12-10</date>
     <license>PHP License</license>
     <state>alpha</state>
     <notes>- Adjusted for compatibility with Selenium Remote Control 0.9.0.
