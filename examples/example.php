@@ -13,7 +13,7 @@ try {
 
     $selenium->type("q", "PEAR");
     $selenium->submit("//form");
-    $selenium->waitForPageToLoad();
+    $selenium->waitForPageToLoad(3000);
     if ($selenium->getTitle() == "PEAR :: Search: PEAR") {
         print "equal\n";
     } else {
