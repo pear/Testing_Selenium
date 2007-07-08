@@ -297,12 +297,6 @@ class Testing_Selenium
     private $timeout;
 
     /**
-     * @var    string
-     * @access private
-     */
-    private $driver;
-
-    /**
      * Constructor
      *
      * @param string $browser
@@ -310,35 +304,16 @@ class Testing_Selenium
      * @param string $host
      * @param int $port
      * @param int $timeout
-     * @param string $driver
      * @access public
      * @throws Testing_Selenium_Exception
      */
-    public function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000, $driver = 'native')
+    public function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000)
     {
         $this->browser = $browser;
         $this->browserUrl = $browserUrl;
         $this->host = $host;
         $this->port = $port;
         $this->timeout = $timeout;
-        $this->setDriver($driver);
-    }
-
-    /**
-     * Set driver for HTTP Request.
-     *
-     * @param string $driver
-     * @access public
-     * @return void
-     * @throws Testing_Selenium_Exception
-     */
-    public function setDriver($driver)
-    {
-        if ($driver == 'curl' or $driver == 'native') {
-            $this->driver = $driver;
-        } else {
-            throw new Testing_Selenium_Exception('Driver has to be "curl" or "native"');
-        }
     }
 
     /**
@@ -352,6 +327,7 @@ class Testing_Selenium
         $this->sessionId = $this->getString("getNewBrowserSession", array($this->browser, $this->browserUrl));
         return $this->sessionId;
     }
+
     /**
      * Close the browser and set session id null
      *
@@ -364,7 +340,6 @@ class Testing_Selenium
         $this->sessionId = null;
     }
 
-  
     /**
      * Clicks on a link, button, checkbox or radio button. If the click action
      * causes a new page to load (like a link usually does), call
@@ -2062,7 +2037,7 @@ class Testing_Selenium
     }
 
 
-    private function doCommand($verb, $args = array())
+    protected function doCommand($verb, $args = array())
     {
         $url = sprintf('http://%s:%s/selenium-server/driver/?cmd=%s', $this->host, $this->port, urlencode($verb));
         for ($i = 0; $i < count($args); $i++) {
@@ -2073,48 +2048,20 @@ class Testing_Selenium
         if (isset($this->sessionId)) {
             $url .= sprintf('&%s=%s', 'sessionId', $this->sessionId);
         }
-        if ($this->driver == 'curl') {
-            $response = $this->useCurl($verb, $args, $url);
-        } else {
-            $response = $this->useNative($verb, $args, $url);
-        }
 
-        if (!preg_match('/^OK/', $response)) {
-            throw new Testing_Selenium_Exception('The Response of the Selenium RC is invalid: ' . $response);
-        }
-        return $response;
-    }
-
-    private function useNative($verb, $args, $url)
-    {
         if (!$handle = fopen($url, 'r')) {
             throw new Testing_Selenium_Exception('Cannot connected to Selenium RC Server');
         }
-        // no socket block
+
         stream_set_blocking($handle, false);
         $response = stream_get_contents($handle);
         fclose($handle);
 
+        if (!preg_match('/^OK/', $response)) {
+            throw new Testing_Selenium_Exception('The Response of the Selenium RC is invalid: ' . $response);
+        }
+
         return $response;
-    }
-
-    private function useCurl($verb, $args, $url)
-    {
-        if (!function_exists('curl_init')) {
-            throw new Testing_Selenium_Exception('cannot use curl exntensions. chosse or "native"');
-        }
-
-        if (!$ch = curl_init($url)) {
-            throw new Testing_Selenium_Exception('Unable to setup curl');
-        }
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-
-        if (($errno = curl_errno($ch)) != 0) {
-            throw new Testing_Selenium_Exception('Curl returned non-null errno ' . $errno . ':' . curl_error($ch));
-        }
-        curl_close($ch);
-        return $result;
     }
 
     private function getString($verb, $args = array())
