@@ -577,8 +577,8 @@ class Testing_Selenium
 
 
     /**
-     * Simulates a user pressing the mouse button (without releasing it yet) on
-     * the specified element.
+     * Simulates a user pressing the mouse button (without releasing it yet) at
+     * the specified location.
      *
      * @access public
      * @param string $locator an element locator
@@ -591,8 +591,8 @@ class Testing_Selenium
 
 
     /**
-     * Simulates a user pressing the mouse button (without releasing it yet) on
-     * the specified element.
+     * Simulates the event that occurs when the user releases the mouse button (i.e., stops
+     * holding the button down) on the specified element.
      *
      * @access public
      * @param string $locator an element locator
@@ -604,8 +604,8 @@ class Testing_Selenium
 
 
     /**
-     * Simulates a user pressing the mouse button (without releasing it yet) on
-     * the specified element.
+     * Simulates the event that occurs when the user releases the mouse button (i.e., stops
+     * holding the button down) at the specified location.
      *
      * @access public
      * @param string $locator an element locator
@@ -917,16 +917,23 @@ class Testing_Selenium
      * as the target.
      * 
      * <p>
+     * Note that there is a big difference between a window's internal JavaScript "name" property
+     * and the "title" of a given window's document (which is normally what you actually see, as an end user,
+     * in the title bar of the window).  The "name" is normally invisible to the end-user; it's the second 
+     * parameter "windowName" passed to the JavaScript method window.open(url, windowName, windowFeatures, replaceFlag)
+     * (which selenium intercepts).
+     * </p><p>
      * Selenium has several strategies for finding the window object referred to by the "windowID" parameter.
      * </p><p>
-     * 1.) if windowID is null, then it is assumed the user is referring to the original window instantiated by the browser).
+     * 1.) if windowID is null, (or the string "null") then it is assumed the user is referring to the original window instantiated by the browser).
      * </p><p>
      * 2.) if the value of the "windowID" parameter is a JavaScript variable name in the current application window, then it is assumed
      * that this variable contains the return value from a call to the JavaScript window.open() method.
      * </p><p>
-     * 3.) Otherwise, selenium looks in a hash it maintains that maps string names to window objects.  Each of these string 
-     * names matches the second parameter "windowName" past to the JavaScript method  window.open(url, windowName, windowFeatures, replaceFlag)
-     * (which selenium intercepts).
+     * 3.) Otherwise, selenium looks in a hash it maintains that maps string names to window "names".
+     * </p><p>
+     * 4.) If <i>that</i> fails, we'll try looping over all of the known windows to try to find the appropriate "title".
+     * Since "title" is not necessarily unique, this may have unexpected behavior.
      * </p><p>
      * If you're having trouble figuring out what is the name of a window that you want to manipulate, look at the selenium log messages
      * which identify the names of windows created via window.open (and therefore intercepted by selenium).  You will see messages
@@ -952,6 +959,8 @@ class Testing_Selenium
      * Selects a frame within the current window.  (You may invoke this command
      * multiple times to select nested frames.)  To select the parent frame, use
      * "relative=parent" as a locator; to select the top frame, use "relative=top".
+     * You can also select a frame by its 0-based index number; select the first frame with
+     * "index=0", or the third frame with "index=2".
      * 
      * <p>
      * You may also use a DOM expression to identify the frame you want directly,
@@ -964,29 +973,6 @@ class Testing_Selenium
     public function selectFrame($locator)
     {
         $this->doCommand("selectFrame", array($locator));
-    }
-
-
-    /**
-     * Return the contents of the log.
-     * 
-     * <p>
-     * This is a placeholder intended to make the code generator make this API
-     * available to clients.  The selenium server will intercept this call, however,
-     * and return its recordkeeping of log messages since the last call to this API.
-     * Thus this code in JavaScript will never be called.
-     * </p><p>
-     * The reason I opted for a servercentric solution is to be able to support
-     * multiple frames served from different domains, which would break a
-     * centralized JavaScript logging mechanism under some conditions.
-     * </p>
-     *
-     * @access public
-     * @return string all log messages seen since the last call to this API
-     */
-    public function getLogMessages()
-    {
-        return $this->getString("getLogMessages", array());
     }
 
 
@@ -1049,15 +1035,36 @@ class Testing_Selenium
 
     /**
      * By default, Selenium's overridden window.confirm() function will
-     * return true, as if the user had manually clicked OK.  After running
+     * return true, as if the user had manually clicked OK; after running
      * this command, the next call to confirm() will return false, as if
-     * the user had clicked Cancel.
+     * the user had clicked Cancel.  Selenium will then resume using the
+     * default behavior for future confirmations, automatically returning 
+     * true (OK) unless/until you explicitly call this command for each
+     * confirmation.
      *
      * @access public
      */
     public function chooseCancelOnNextConfirmation()
     {
         $this->doCommand("chooseCancelOnNextConfirmation", array());
+    }
+
+
+    /**
+     * Undo the effect of calling chooseCancelOnNextConfirmation.  Note
+     * that Selenium's overridden window.confirm() function will normally automatically
+     * return true, as if the user had manually clicked OK, so you shouldn't
+     * need to use this command unless for some reason you need to change
+     * your mind prior to the next confirmation.  After any confirmation, Selenium will resume using the
+     * default behavior for future confirmations, automatically returning 
+     * true (OK) unless/until you explicitly call chooseCancelOnNextConfirmation for each
+     * confirmation.
+     *
+     * @access public
+     */
+    public function chooseOkOnNextConfirmation()
+    {
+        $this->doCommand("chooseOkOnNextConfirmation", array());
     }
 
 
@@ -1332,13 +1339,12 @@ class Testing_Selenium
      * 
      * <p>
      * Note that, by default, the snippet will run in the context of the "selenium"
-     * object itself, so <code>this</code> will refer to the Selenium object, and <code>window</code> will
-     * refer to the top-level runner test window, not the window of your application.
+     * object itself, so <code>this</code> will refer to the Selenium object.  Use <code>window</code> to
+     * refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code>
      * </p><p>
-     * If you need a reference to the window of your application, you can refer
-     * to <code>this.browserbot.getCurrentWindow()</code> and if you need to use
+     * If you need to use
      * a locator to refer to a single element in your application page, you can
-     * use <code>this.browserbot.findElement("foo")</code> where "foo" is your locator.
+     * use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator.
      * </p>
      *
      * @access public
@@ -1512,7 +1518,7 @@ class Testing_Selenium
      * Gets the value of an element attribute.
      *
      * @access public
-     * @param string $attributeLocator an element locator followed by an
+     * @param string $attributeLocator an element locator followed by an @ sign and then the name of the attribute, e.g. "foo@bar"
      * @return string the value of the specified attribute
      */
     public function getAttribute($attributeLocator)
@@ -1711,26 +1717,24 @@ class Testing_Selenium
 
 
     /**
-     * Gives focus to a window
+     * Gives focus to the currently selected window
      *
      * @access public
-     * @param string $windowName name of the window to be given focus
      */
-    public function windowFocus($windowName)
+    public function windowFocus()
     {
-        $this->doCommand("windowFocus", array($windowName));
+        $this->doCommand("windowFocus", array());
     }
 
 
     /**
-     * Resize window to take up the entire screen
+     * Resize currently selected window to take up the entire screen
      *
      * @access public
-     * @param string $windowName name of the window to be enlarged
      */
-    public function windowMaximize($windowName)
+    public function windowMaximize()
     {
-        $this->doCommand("windowMaximize", array($windowName));
+        $this->doCommand("windowMaximize", array());
     }
 
 
@@ -1812,13 +1816,13 @@ class Testing_Selenium
 
 
     /**
-     * Check if these two elements have same parent and are ordered. Two same elements will
+     * Check if these two elements have same parent and are ordered siblings in the DOM. Two same elements will
      * not be considered ordered.
      *
      * @access public
      * @param string $locator1 an element locator pointing to the first element
      * @param string $locator2 an element locator pointing to the second element
-     * @return boolean true if two elements are ordered and have same parent, false otherwise
+     * @return boolean true if element1 is the previous sibling of element2, false otherwise
      */
     public function isOrdered($locator1, $locator2)
     {
@@ -1898,28 +1902,6 @@ class Testing_Selenium
 
 
     /**
-     * Writes a message to the status bar and adds a note to the browser-side
-     * log.
-     * 
-     * <p>
-     * If logLevelThreshold is specified, set the threshold for logging
-     * to that level (debug, info, warn, error).
-     * </p><p>
-     * (Note that the browser-side logs will <i>not</i> be sent back to the
-     * server, and are invisible to the Client Driver.)
-     * </p>
-     *
-     * @access public
-     * @param string $context the message to be sent to the browser
-     * @param string $logLevelThreshold one of "debug", "info", "warn", "error", sets the threshold for browser-side logging
-     */
-    public function setContext($context, $logLevelThreshold)
-    {
-        $this->doCommand("setContext", array($context, $logLevelThreshold));
-    }
-
-
-    /**
      * Returns the specified expression.
      * 
      * <p>
@@ -1934,6 +1916,52 @@ class Testing_Selenium
     public function getExpression($expression)
     {
         return $this->getString("getExpression", array($expression));
+    }
+
+
+    /**
+     * Returns the number of nodes that match the specified xpath, eg. "//table" would give
+     * the number of tables.
+     *
+     * @access public
+     * @param string $xpath the xpath expression to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+     * @return number the number of nodes that match the specified xpath
+     */
+    public function getXpathCount($xpath)
+    {
+        return $this->getNumber("getXpathCount", array($xpath));
+    }
+
+
+    /**
+     * Temporarily sets the "id" attribute of the specified element, so you can locate it in the future
+     * using its ID rather than a slow/complicated XPath.  This ID will disappear once the page is
+     * reloaded.
+     *
+     * @access public
+     * @param string $locator an element locator pointing to an element
+     * @param string $identifier a string to be used as the ID of the specified element
+     */
+    public function assignId($locator, $identifier)
+    {
+        $this->doCommand("assignId", array($locator, $identifier));
+    }
+
+
+    /**
+     * Specifies whether Selenium should use the native in-browser implementation
+     * of XPath (if any native version is available); if you pass "false" to
+     * this function, we will always use our pure-JavaScript xpath library.
+     * Using the pure-JS xpath library can improve the consistency of xpath
+     * element locators between different browser vendors, but the pure-JS
+     * version is much slower than the native implementations.
+     *
+     * @access public
+     * @param string $allow boolean, true means we'll prefer to use native XPath; false means we'll only use JS XPath
+     */
+    public function allowNativeXpath($allow)
+    {
+        $this->doCommand("allowNativeXpath", array($allow));
     }
 
 
@@ -1999,6 +2027,26 @@ class Testing_Selenium
 
 
     /**
+     * Waits for a new frame to load.
+     * 
+     * <p>
+     * Selenium constantly keeps track of new pages and frames loading, 
+     * and sets a "newPageLoaded" flag when it first notices a page load.
+     * </p>
+     * 
+     * See waitForPageToLoad for more information.
+     *
+     * @access public
+     * @param string $frameAddress FrameAddress from the server side
+     * @param string $timeout a timeout in milliseconds, after which this command will return with an error
+     */
+    public function waitForFrameToLoad($frameAddress, $timeout)
+    {
+        $this->doCommand("waitForFrameToLoad", array($frameAddress, $timeout));
+    }
+
+
+    /**
      * Return all cookies of the current page under test.
      *
      * @access public
@@ -2034,6 +2082,98 @@ class Testing_Selenium
     public function deleteCookie($name, $path)
     {
         $this->doCommand("deleteCookie", array($name, $path));
+    }
+
+
+    /**
+     * Sets the threshold for browser-side logging messages; log messages beneath this threshold will be discarded.
+     * Valid logLevel strings are: "debug", "info", "warn", "error" or "off".
+     * To see the browser logs, you need to
+     * either show the log window in GUI mode, or enable browser-side logging in Selenium RC.
+     *
+     * @access public
+     * @param string $logLevel one of the following: "debug", "info", "warn", "error" or "off"
+     */
+    public function setBrowserLogLevel($logLevel)
+    {
+        $this->doCommand("setBrowserLogLevel", array($logLevel));
+    }
+
+
+    /**
+     * Creates a new "script" tag in the body of the current test window, and 
+     * adds the specified text into the body of the command.  Scripts run in
+     * this way can often be debugged more easily than scripts executed using
+     * Selenium's "getEval" command.  Beware that JS exceptions thrown in these script
+     * tags aren't managed by Selenium, so you should probably wrap your script
+     * in try/catch blocks if there is any chance that the script will throw
+     * an exception.
+     *
+     * @access public
+     * @param string $script the JavaScript snippet to run
+     */
+    public function runScript($script)
+    {
+        $this->doCommand("runScript", array($script));
+    }
+
+
+    /**
+     * Defines a new function for Selenium to locate elements on the page.
+     * For example,
+     * if you define the strategy "foo", and someone runs click("foo=blah"), we'll
+     * run your function, passing you the string "blah", and click on the element 
+     * that your function
+     * returns, or throw an "Element not found" error if your function returns null.
+     * 
+     * We'll pass three arguments to your function:
+     * 
+     * <ul>
+     * 
+     * <li>
+     * locator: the string the user passed in
+     * </li>
+     * <li>
+     * inWindow: the currently selected window
+     * </li>
+     * <li>
+     * inDocument: the currently selected document
+     * </li>
+     * </ul>
+     * The function must return null if the element can't be found.
+     *
+     * @access public
+     * @param string $strategyName the name of the strategy to define; this should use only   letters [a-zA-Z] with no spaces or other punctuation.
+     * @param string $functionDefinition a string defining the body of a function in JavaScript.   For example: <code>return inDocument.getElementById(locator);</code>
+     */
+    public function addLocationStrategy($strategyName, $functionDefinition)
+    {
+        $this->doCommand("addLocationStrategy", array($strategyName, $functionDefinition));
+    }
+
+
+    /**
+     * Writes a message to the status bar and adds a note to the browser-side
+     * log.
+     *
+     * @access public
+     * @param string $context the message to be sent to the browser
+     */
+    public function setContext($context)
+    {
+        $this->doCommand("setContext", array($context));
+    }
+
+
+    /**
+     * Captures a PNG screenshot to the specified file.
+     *
+     * @access public
+     * @param string $filename the absolute path to the file to be written, e.g. "c:\blah\screenshot.png"
+     */
+    public function captureScreenshot($filename)
+    {
+        $this->doCommand("captureScreenshot", array($filename));
     }
 
 
