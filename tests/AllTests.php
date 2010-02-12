@@ -2,7 +2,7 @@
 // Commands are tested in Selenium RC build, and all commands are generated using XSLT.
 // So this tests only if basic commands work.
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'TestSuite::main');
+    define('PHPUnit_MAIN_METHOD', 'Testing_Selenium_AllTests::main');
 }
  
 require_once 'PHPUnit/Framework.php';
@@ -12,7 +12,7 @@ require_once 'SeleniumTest.php';
 require_once 'GoogleTest.php';
 require_once 'BugTest.php';
  
-class AllTests
+class Testing_Selenium_AllTests
 {
     public static function main()
     {
@@ -30,7 +30,7 @@ class AllTests
     }
 }
  
-if (PHPUnit_MAIN_METHOD == 'Framework_AllTests::main') {
-    Framework_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Testing_Selenium_AllTests::main') {
+    Testing_Selenium_AllTests::main();
 }
 ?>
