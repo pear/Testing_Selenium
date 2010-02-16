@@ -1,6 +1,6 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . './PEAR/');
+
 require_once 'Testing/Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 

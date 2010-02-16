@@ -4,7 +4,7 @@
 // Selenium RC Server is available the following website.
 // http://openqa.org/selenium-rc/
 //error_reporting(E_ALL|E_STRICT);
-set_include_path(get_include_path() . PATH_SEPARATOR . './PEAR/');
+
 require_once 'Testing/Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
@@ -12,10 +12,10 @@ class SeleniumTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
 
-    public function __construct($name)
+    public function __construct()
     {
         $this->browserUrl = "http://localhost:4444/selenium-server/tests/";
-        parent::__construct($name);
+        parent::__construct();
     }
 
     public function assertEndsWith($substring, $actual)

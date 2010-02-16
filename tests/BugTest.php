@@ -6,10 +6,10 @@ class BugTest extends PHPUnit_Framework_TestCase
 {
     private $selenium;
 
-    public function __construct($name)
+    public function __construct()
     {
         $this->browserUrl = "http://www.ganchiku.com/selenium/tests";
-        parent::__construct($name);
+        parent::__construct();
     }
     public function setUp()
     {
