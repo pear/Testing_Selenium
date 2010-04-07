@@ -13,6 +13,14 @@ class BugTest extends PHPUnit_Framework_TestCase
     }
     public function setUp()
     {
+        $errno = null;
+        $errstr = null;
+        $resource = @fsockopen('127.0.0.1', 4444, $errno, $errstr, 10);
+        if (!$resource) {
+            $this->markTestSkipped($errstr);
+        } else {
+            fclose($resource);
+        }
         try {
             $this->selenium = new Testing_Selenium("*firefox", $this->browserUrl);
             $this->selenium->start();
@@ -24,10 +32,12 @@ class BugTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        try {
-            $this->selenium->stop();
-        } catch (Testing_Selenium_Exception $e) {
-            echo $e;
+        if (isset($this->selenium)) {
+            try {
+                $this->selenium->stop();
+            } catch (Testing_Selenium_Exception $e) {
+                echo $e;
+            }
         }
     }
     // {{{ Bug #8893

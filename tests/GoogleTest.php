@@ -10,13 +10,23 @@ class GoogleTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $errno = null;
+        $errstr = null;
+        $resource = @fsockopen('127.0.0.1', 4444, $errno, $errstr, 10);
+        if (!$resource) {
+            $this->markTestSkipped($errstr);
+        } else {
+            fclose($resource);
+        }
         $this->selenium = new Testing_Selenium("*firefox", "http://www.google.com");
         $this->selenium->start();
     }
 
     public function tearDown()
     {
-        $this->selenium->stop();
+        if (isset($this->selenium)) {
+            $this->selenium->stop();
+        }
     }
 
     public function testGoogle()
