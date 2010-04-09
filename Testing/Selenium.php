@@ -36,27 +36,27 @@ require_once 'Testing/Selenium/Exception.php';
 
 /**
  * Defines an object that runs Selenium commands.
- * 
- * 
+ *
+ *
  * <p>
  * <b>Element Locators</b>
  * </p><p>
- * 
+ *
  * Element Locators tell Selenium which HTML element a command refers to.
  * The format of a locator is:
  * </p><p>
- * 
+ *
  * <i>locatorType</i><b>=</b><i>argument</i>
  * </p>
  * <p>
- * 
+ *
  * We support the following strategies for locating elements:
- * 
+ *
  * </p>
  * <ul>
- * 
+ *
  * <li>
- * <b>identifier</b>=<i>id</i>: 
+ * <b>identifier</b>=<i>id</i>:
  * Select the element with the specified @id attribute. If no match is
  * found, select the first element whose @name attribute is <i>id</i>.
  * (This is normally the default; see below.)
@@ -68,9 +68,9 @@ require_once 'Testing/Selenium/Exception.php';
  * <li>
  * <b>name</b>=<i>name</i>:
  * Select the first element with the specified @name attribute.
- * 
+ *
  * <ul>
- * 
+ *
  * <li>
  * username
  * </li>
@@ -82,20 +82,20 @@ require_once 'Testing/Selenium/Exception.php';
  * The name may optionally be followed by one or more <i>element-filters</i>, separated from the name by whitespace.  If the <i>filterType</i> is not specified, <b>value</b> is assumed.
  * </p>
  * <ul>
- * 
+ *
  * <li>
  * name=flavour value=chocolate
  * </li>
  * </ul>
  * </li>
  * <li>
- * <b>dom</b>=<i>javascriptExpression</i>: 
- * 
+ * <b>dom</b>=<i>javascriptExpression</i>:
+ *
  * Find an element by evaluating the specified string.  This allows you to traverse the HTML Document Object
  * Model using JavaScript.  Note that you must not return a value in this string; simply make it the last expression in the block.
- * 
+ *
  * <ul>
- * 
+ *
  * <li>
  * dom=document.forms['myForm'].myDropdown
  * </li>
@@ -108,11 +108,11 @@ require_once 'Testing/Selenium/Exception.php';
  * </ul>
  * </li>
  * <li>
- * <b>xpath</b>=<i>xpathExpression</i>: 
+ * <b>xpath</b>=<i>xpathExpression</i>:
  * Locate an element using an XPath expression.
- * 
+ *
  * <ul>
- * 
+ *
  * <li>
  * xpath=//img[@alt='The image alt text']
  * </li>
@@ -140,9 +140,9 @@ require_once 'Testing/Selenium/Exception.php';
  * <b>link</b>=<i>textPattern</i>:
  * Select the link (anchor) element which contains text matching the
  * specified <i>pattern</i>.
- * 
+ *
  * <ul>
- * 
+ *
  * <li>
  * link=The link text
  * </li>
@@ -151,9 +151,9 @@ require_once 'Testing/Selenium/Exception.php';
  * <li>
  * <b>css</b>=<i>cssSelectorSyntax</i>:
  * Select the element using css selectors. Please refer to CSS2 selectors, CSS3 selectors for more information. You can also check the TestCssLocators test in the selenium test suite for an example of usage, which is included in the downloaded selenium core package.
- * 
+ *
  * <ul>
- * 
+ *
  * <li>
  * css=a[href="#id3"]
  * </li>
@@ -162,17 +162,17 @@ require_once 'Testing/Selenium/Exception.php';
  * </li>
  * </ul>
 <p>
- * Currently the css selector locator supports all css1, css2 and css3 selectors except namespace in css3, some pseudo classes(:nth-of-type, :nth-last-of-type, :first-of-type, :last-of-type, :only-of-type, :visited, :hover, :active, :focus, :indeterminate) and pseudo elements(::first-line, ::first-letter, ::selection, ::before, ::after). 
+ * Currently the css selector locator supports all css1, css2 and css3 selectors except namespace in css3, some pseudo classes(:nth-of-type, :nth-last-of-type, :first-of-type, :last-of-type, :only-of-type, :visited, :hover, :active, :focus, :indeterminate) and pseudo elements(::first-line, ::first-letter, ::selection, ::before, ::after).
  * </p>
  * </li>
  * </ul><p>
- * 
+ *
  * Without an explicit locator prefix, Selenium uses the following default
  * strategies:
- * 
+ *
  * </p>
  * <ul>
- * 
+ *
  * <li>
  * <b>dom</b>, for locators starting with "document."
  * </li>
@@ -186,7 +186,7 @@ require_once 'Testing/Selenium/Exception.php';
  * <p>
  * <b>Element Filters</b>
  * </p><p>
- * 
+ *
  * <p>
  * Element filters can be used with a locator to refine a list of candidate elements.  They are currently used only in the 'name' element-locator.
  * </p>
@@ -194,7 +194,7 @@ require_once 'Testing/Selenium/Exception.php';
  * Filters look much like locators, ie.
  * </p>
 <p>
- * 
+ *
  * <i>filterType</i><b>=</b><i>argument</i>
  * </p>
  * <p>
@@ -204,30 +204,30 @@ require_once 'Testing/Selenium/Exception.php';
  * <b>value=</b><i>valuePattern</i>
  * </p>
 <p>
- * 
- * 
+ *
+ *
  * Matches elements based on their values.  This is particularly useful for refining a list of similarly-named toggle-buttons.
  * </p>
  * <p>
  * <b>index=</b><i>index</i>
  * </p>
 <p>
- * 
- * 
+ *
+ *
  * Selects a single element based on its position in the list (offset from zero).
  * </p>
- * 
+ *
  * </p>
- * 
+ *
  * <p>
  * <b>String-match Patterns</b>
  * </p><p>
- * 
+ *
  * Various Pattern syntaxes are available for matching string values:
- * 
+ *
  * </p>
  * <ul>
- * 
+ *
  * <li>
  * <b>glob:</b><i>pattern</i>:
  * Match a string against a "glob" (aka "wildmat") pattern. "Glob" is a
@@ -243,15 +243,15 @@ require_once 'Testing/Selenium/Exception.php';
  * </li>
  * <li>
  * <b>exact:</b><i>string</i>:
- * 
+ *
  * Match a string exactly, verbatim, without any of that fancy wildcard
  * stuff.
  * </li>
  * </ul><p>
- * 
+ *
  * If no pattern prefix is specified, Selenium assumes that it's a "glob"
  * pattern.
- * 
+ *
  * </p>
  *
  * @package Selenium
@@ -646,7 +646,7 @@ class Testing_Selenium
 
     /**
      * Sets the value of an input field, as though you typed it in.
-     * 
+     *
      * <p>
      * Can also be used to set the value of combo boxes, check boxes, etc. In these cases,
      * value should be the value of the option selected, not the visible text.
@@ -664,7 +664,7 @@ class Testing_Selenium
 
     /**
      * Simulates keystroke events on the specified element, as though you typed the value key-by-key.
-     * 
+     *
      * <p>
      * This is a convenience method for calling keyDown, keyUp, keyPress for every character in the specified string;
      * this is useful for dynamic UI widgets (like auto-completing combo boxes) that require explicit key events.
@@ -704,7 +704,7 @@ class Testing_Selenium
     /**
      * Get execution speed (i.e., get the millisecond length of the delay following each selenium operation).  By default, there is no such delay, i.e.,
      * the delay is 0 milliseconds.
-     * 
+     *
      * See also setSpeed.
      *
      * @access public
@@ -741,24 +741,24 @@ class Testing_Selenium
 
     /**
      * Select an option from a drop-down using an option locator.
-     * 
+     *
      * <p>
-     * 
+     *
      * Option locators provide different ways of specifying options of an HTML
      * Select element (e.g. for selecting a specific option, or for asserting
      * that the selected option satisfies a specification). There are several
      * forms of Select Option Locator.
-     * 
+     *
      * </p>
      * <ul>
-     * 
+     *
      * <li>
      * <b>label</b>=<i>labelPattern</i>:
      * matches options based on their labels, i.e. the visible text. (This
      * is the default.)
-     * 
+     *
      * <ul>
-     * 
+     *
      * <li>
      * label=regexp:^[Oo]ther
      * </li>
@@ -767,9 +767,9 @@ class Testing_Selenium
      * <li>
      * <b>value</b>=<i>valuePattern</i>:
      * matches options based on their values.
-     * 
+     *
      * <ul>
-     * 
+     *
      * <li>
      * value=other
      * </li>
@@ -777,11 +777,11 @@ class Testing_Selenium
      * </li>
      * <li>
      * <b>id</b>=<i>id</i>:
-     * 
+     *
      * matches options based on their ids.
-     * 
+     *
      * <ul>
-     * 
+     *
      * <li>
      * id=option1
      * </li>
@@ -790,18 +790,18 @@ class Testing_Selenium
      * <li>
      * <b>index</b>=<i>index</i>:
      * matches an option based on its index (offset from zero).
-     * 
+     *
      * <ul>
-     * 
+     *
      * <li>
      * index=2
      * </li>
      * </ul>
      * </li>
      * </ul><p>
-     * 
+     *
      * If no option locator prefix is provided, the default behaviour is to match on <b>label</b>.
-     * 
+     *
      * </p>
      *
      * @access public
@@ -816,7 +816,7 @@ class Testing_Selenium
 
     /**
      * Add a selection to the set of selected options in a multi-select element using an option locator.
-     * 
+     *
      * @see #doSelect for details of option locators
      *
      * @access public
@@ -831,7 +831,7 @@ class Testing_Selenium
 
     /**
      * Remove a selection from the set of selected options in a multi-select element using an option locator.
-     * 
+     *
      * @see #doSelect for details of option locators
      *
      * @access public
@@ -872,10 +872,10 @@ class Testing_Selenium
     /**
      * Opens an URL in the test frame. This accepts both relative and absolute
      * URLs.
-     * 
+     *
      * The "open" command waits for the page to load before proceeding,
      * ie. the "AndWait" suffix is implicit.
-     * 
+     *
      * <i>Note</i>: The URL must be on the same domain as the runner HTML
      * due to security restrictions in the browser (Same Origin Policy). If you
      * need to open an URL on another domain, use the Selenium Server to start a
@@ -894,7 +894,7 @@ class Testing_Selenium
      * Opens a popup window (if a window with that ID isn't already open).
      * After opening the window, you'll need to select it using the selectWindow
      * command.
-     * 
+     *
      * <p>
      * This command can also be a useful workaround for bug SEL-339.  In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example).
      * In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using
@@ -915,11 +915,11 @@ class Testing_Selenium
      * Selects a popup window; once a popup window has been selected, all
      * commands go to that window. To select the main window again, use null
      * as the target.
-     * 
+     *
      * <p>
      * Note that there is a big difference between a window's internal JavaScript "name" property
      * and the "title" of a given window's document (which is normally what you actually see, as an end user,
-     * in the title bar of the window).  The "name" is normally invisible to the end-user; it's the second 
+     * in the title bar of the window).  The "name" is normally invisible to the end-user; it's the second
      * parameter "windowName" passed to the JavaScript method window.open(url, windowName, windowFeatures, replaceFlag)
      * (which selenium intercepts).
      * </p><p>
@@ -961,7 +961,7 @@ class Testing_Selenium
      * "relative=parent" as a locator; to select the top frame, use "relative=top".
      * You can also select a frame by its 0-based index number; select the first frame with
      * "index=0", or the third frame with "index=2".
-     * 
+     *
      * <p>
      * You may also use a DOM expression to identify the frame you want directly,
      * like this: <code>dom=frames["main"].frames["subframe"]</code>
@@ -978,7 +978,7 @@ class Testing_Selenium
 
     /**
      * Determine whether current/locator identify the frame containing this running code.
-     * 
+     *
      * <p>
      * This is useful in proxy injection mode, where this code runs in every
      * browser frame and window, and sometimes the selenium server needs to identify
@@ -1000,7 +1000,7 @@ class Testing_Selenium
 
     /**
      * Determine whether currentWindowString plus target identify the window containing this running code.
-     * 
+     *
      * <p>
      * This is useful in proxy injection mode, where this code runs in every
      * browser frame and window, and sometimes the selenium server needs to identify
@@ -1038,7 +1038,7 @@ class Testing_Selenium
      * return true, as if the user had manually clicked OK; after running
      * this command, the next call to confirm() will return false, as if
      * the user had clicked Cancel.  Selenium will then resume using the
-     * default behavior for future confirmations, automatically returning 
+     * default behavior for future confirmations, automatically returning
      * true (OK) unless/until you explicitly call this command for each
      * confirmation.
      *
@@ -1056,7 +1056,7 @@ class Testing_Selenium
      * return true, as if the user had manually clicked OK, so you shouldn't
      * need to use this command unless for some reason you need to change
      * your mind prior to the next confirmation.  After any confirmation, Selenium will resume using the
-     * default behavior for future confirmations, automatically returning 
+     * default behavior for future confirmations, automatically returning
      * true (OK) unless/until you explicitly call chooseCancelOnNextConfirmation for each
      * confirmation.
      *
@@ -1117,11 +1117,11 @@ class Testing_Selenium
 
     /**
      * Has an alert occurred?
-     * 
+     *
      * <p>
-     * 
+     *
      * This function never throws an exception
-     * 
+     *
      * </p>
      *
      * @access public
@@ -1135,11 +1135,11 @@ class Testing_Selenium
 
     /**
      * Has a prompt occurred?
-     * 
+     *
      * <p>
-     * 
+     *
      * This function never throws an exception
-     * 
+     *
      * </p>
      *
      * @access public
@@ -1153,11 +1153,11 @@ class Testing_Selenium
 
     /**
      * Has confirm() been called?
-     * 
+     *
      * <p>
-     * 
+     *
      * This function never throws an exception
-     * 
+     *
      * </p>
      *
      * @access public
@@ -1171,7 +1171,7 @@ class Testing_Selenium
 
     /**
      * Retrieves the message of a JavaScript alert generated during the previous action, or fail if there were no alerts.
-     * 
+     *
      * <p>
      * Getting an alert has the same effect as manually clicking OK. If an
      * alert is generated but you do not get/verify it, the next Selenium action
@@ -1197,26 +1197,26 @@ class Testing_Selenium
     /**
      * Retrieves the message of a JavaScript confirmation dialog generated during
      * the previous action.
-     * 
+     *
      * <p>
-     * 
+     *
      * By default, the confirm function will return true, having the same effect
      * as manually clicking OK. This can be changed by prior execution of the
      * chooseCancelOnNextConfirmation command. If an confirmation is generated
      * but you do not get/verify it, the next Selenium action will fail.
-     * 
+     *
      * </p><p>
-     * 
+     *
      * NOTE: under Selenium, JavaScript confirmations will NOT pop up a visible
      * dialog.
-     * 
+     *
      * </p><p>
-     * 
+     *
      * NOTE: Selenium does NOT support JavaScript confirmations that are
      * generated in a page's onload() event handler. In this case a visible
      * dialog WILL be generated and Selenium will hang until you manually click
      * OK.
-     * 
+     *
      * </p>
      *
      * @access public
@@ -1231,7 +1231,7 @@ class Testing_Selenium
     /**
      * Retrieves the message of a JavaScript question prompt dialog generated during
      * the previous action.
-     * 
+     *
      * <p>
      * Successful handling of the prompt requires prior execution of the
      * answerOnNextPrompt command. If a prompt is generated but you
@@ -1336,7 +1336,7 @@ class Testing_Selenium
     /**
      * Gets the result of evaluating the specified JavaScript snippet.  The snippet may
      * have multiple lines, but only the result of the last line will be returned.
-     * 
+     *
      * <p>
      * Note that, by default, the snippet will run in the context of the "selenium"
      * object itself, so <code>this</code> will refer to the Selenium object.  Use <code>window</code> to
@@ -1586,7 +1586,7 @@ class Testing_Selenium
 
     /**
      * Returns the IDs of all buttons on the page.
-     * 
+     *
      * <p>
      * If a given button has no ID, it will appear as "" in this array.
      * </p>
@@ -1602,7 +1602,7 @@ class Testing_Selenium
 
     /**
      * Returns the IDs of all links on the page.
-     * 
+     *
      * <p>
      * If a given link has no ID, it will appear as "" in this array.
      * </p>
@@ -1618,7 +1618,7 @@ class Testing_Selenium
 
     /**
      * Returns the IDs of all input fields on the page.
-     * 
+     *
      * <p>
      * If a given field has no ID, it will appear as "" in this array.
      * </p>
@@ -1884,7 +1884,7 @@ class Testing_Selenium
 
     /**
      * Retrieves the text cursor position in the given input element or textarea; beware, this may not work perfectly on all browsers.
-     * 
+     *
      * <p>
      * Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to
      * return the position of the last location of the cursor, even though the cursor is now gone from the page.  This is filed as SEL-243.
@@ -1903,7 +1903,7 @@ class Testing_Selenium
 
     /**
      * Returns the specified expression.
-     * 
+     *
      * <p>
      * This is useful because of JavaScript preprocessing.
      * It is used to generate commands like assertExpression and waitForExpression.
@@ -1969,7 +1969,7 @@ class Testing_Selenium
      * Runs the specified JavaScript snippet repeatedly until it evaluates to "true".
      * The snippet may have multiple lines, but only the result of the last line
      * will be considered.
-     * 
+     *
      * <p>
      * Note that, by default, the snippet will be run in the runner's test window, not in the window
      * of your application.  To get the window of your application, you can use
@@ -1989,7 +1989,7 @@ class Testing_Selenium
 
     /**
      * Specifies the amount of time that Selenium will wait for actions to complete.
-     * 
+     *
      * <p>
      * Actions that require waiting include "open" and the "waitFor*" actions.
      * </p>
@@ -2006,7 +2006,7 @@ class Testing_Selenium
 
     /**
      * Waits for a new page to load.
-     * 
+     *
      * <p>
      * You can use this command instead of the "AndWait" suffixes, "clickAndWait", "selectAndWait", "typeAndWait" etc.
      * (which are only available in the JS API).
@@ -2028,12 +2028,12 @@ class Testing_Selenium
 
     /**
      * Waits for a new frame to load.
-     * 
+     *
      * <p>
-     * Selenium constantly keeps track of new pages and frames loading, 
+     * Selenium constantly keeps track of new pages and frames loading,
      * and sets a "newPageLoaded" flag when it first notices a page load.
      * </p>
-     * 
+     *
      * See waitForPageToLoad for more information.
      *
      * @access public
@@ -2101,7 +2101,7 @@ class Testing_Selenium
 
 
     /**
-     * Creates a new "script" tag in the body of the current test window, and 
+     * Creates a new "script" tag in the body of the current test window, and
      * adds the specified text into the body of the command.  Scripts run in
      * this way can often be debugged more easily than scripts executed using
      * Selenium's "getEval" command.  Beware that JS exceptions thrown in these script
@@ -2122,14 +2122,14 @@ class Testing_Selenium
      * Defines a new function for Selenium to locate elements on the page.
      * For example,
      * if you define the strategy "foo", and someone runs click("foo=blah"), we'll
-     * run your function, passing you the string "blah", and click on the element 
+     * run your function, passing you the string "blah", and click on the element
      * that your function
      * returns, or throw an "Element not found" error if your function returns null.
-     * 
+     *
      * We'll pass three arguments to your function:
-     * 
+     *
      * <ul>
-     * 
+     *
      * <li>
      * locator: the string the user passed in
      * </li>
@@ -2193,7 +2193,7 @@ class Testing_Selenium
             throw new Testing_Selenium_Exception('Cannot connected to Selenium RC Server');
         }
 
-        stream_set_blocking($handle, false);
+        stream_set_blocking($handle, 1);
         $response = stream_get_contents($handle);
         fclose($handle);
 
