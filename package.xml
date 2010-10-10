@@ -36,8 +36,8 @@ the Selenium Server.  (The Selenium Server is a Java application.)</description>
  <date>2010-10-10</date>
  <time>17:52:05</time>
  <version>
-  <release>0.4.7</release>
-  <api>0.4.7</api>
+  <release>0.4.4</release>
+  <api>0.4.4</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -297,8 +297,8 @@ Fixed Bug: Thanks to Bjoern Schotte, now developper of this package, fixed the H
   </release>
   <release>
    <version>
-    <release>0.4.7</release>
-    <api>0.4.7</api>
+    <release>0.4.4</release>
+    <api>0.4.4</api>
    </version>
    <stability>
     <release>alpha</release>
