@@ -4,14 +4,17 @@
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Testing_Selenium_AllTests::main');
 }
- 
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
 
-require_once 'SeleniumTest.php';
-require_once 'GoogleTest.php';
-require_once 'BugTest.php';
- 
+if ($fp = @fopen('PHPUnit/Autoload.php', 'r', true)) {
+    require_once 'PHPUnit/Autoload.php';
+} elseif ($fp = @fopen('PHPUnit/Framework.php', 'r', true)) {
+    require_once 'PHPUnit/Framework.php';
+    require_once 'PHPUnit/TextUI/TestRunner.php';
+} else {
+    die('skip could not find PHPUnit');
+}
+fclose($fp);
+
 class Testing_Selenium_AllTests
 {
     public static function main()
@@ -22,10 +25,8 @@ class Testing_Selenium_AllTests
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
-        $suite->addTestSuite('SeleniumTest');
-        $suite->addTestSuite('GoogleTest');
-        $suite->addTestSuite('BugTest');
- 
+        $dir = new GlobIterator(dirname(__FILE__) . '/*Test.php');
+        $suite->addTestFiles($dir);
         return $suite;
     }
 }
