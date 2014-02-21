@@ -1,0 +1,39 @@
+{
+    "authors": [
+        {
+            "email": "ganchiku@gmail.com",
+            "name": "Shin Ohno",
+            "role": "Lead"
+        },
+        {
+            "email": "bjoern@thinkphphq.de",
+            "name": "Bjoern Schotte",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Testing": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/Testing_Selenium",
+    "include-path": [
+        "./"
+    ],
+    "license": "PHP License",
+    "name": "pear/testing_selenium",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Testing_Selenium",
+        "source": "https://github.com/pear/Testing_Selenium"
+    },
+    "type": "library",
+    "suggest": {
+        "ext-curl": "May require the curl PHP extension"
+    },
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
